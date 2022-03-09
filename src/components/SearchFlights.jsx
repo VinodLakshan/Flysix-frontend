@@ -1,16 +1,21 @@
-import { CompareArrows, FlightLand, FlightTakeoff, Person, Search } from '@mui/icons-material'
-import { Autocomplete, Button, Container, FormControl, Grid, IconButton, InputLabel, MenuItem, Paper, Select, Stack, TextField } from '@mui/material'
+import { CompareArrows, FlightLand, FlightTakeoff, Search } from '@mui/icons-material'
+import { Autocomplete, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import { DatePicker, DateRangePicker, DesktopDatePicker, DesktopDateRangePicker, LoadingButton, LocalizationProvider, MobileDatePicker, MobileDateRangePicker } from '@mui/lab';
+import { DesktopDatePicker, DesktopDateRangePicker, LoadingButton, LocalizationProvider, MobileDatePicker, MobileDateRangePicker } from '@mui/lab';
+import { airports } from "../Data";
 
-const SearchFlights = () => {
+const SearchFlights = ({ type }) => {
 
     const [value, setValue] = React.useState([null, null]);
     const [value2, setValue2] = React.useState(null);
     const [searchItems, setSearchItems] = React.useState({ trip: 2 });
 
+
+    const handleSearch = async () => {
+
+    }
 
     return (
         <Paper elevation={5}
@@ -19,11 +24,11 @@ const SearchFlights = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 borderRadius: 2,
-                maxWidth: 800
+                maxWidth: type === "hr" ? 1000 : 800
             }}
         >
             <Grid container columnSpacing={1} rowSpacing={{ xs: 3, sm: 4 }} sx={{ p: 4 }}>
-                <Grid item xs={6} sm={3} >
+                <Grid item xs={6} sm={3} md={type === "hr" ? 2.5 : 3}>
 
                     <FormControl size="small"
                         sx={{
@@ -49,7 +54,7 @@ const SearchFlights = () => {
                     </FormControl>
                 </Grid>
 
-                <Grid item xs={6} sm={3}>
+                <Grid item xs={6} sm={3} md={type === "hr" ? 2.5 : 3}>
                     <FormControl size="small"
                         sx={{
                             minWidth: 130,
@@ -74,7 +79,7 @@ const SearchFlights = () => {
                     </FormControl>
                 </Grid>
 
-                <Grid item xs={6} sm={3}>
+                <Grid item xs={6} sm={3} md={type === "hr" ? 2.5 : 3}>
                     <FormControl size="small"
                         sx={{
                             minWidth: 130,
@@ -99,7 +104,7 @@ const SearchFlights = () => {
                     </FormControl>
                 </Grid>
 
-                <Grid item xs={6} sm={3}>
+                <Grid item xs={6} sm={3} md={type === "hr" ? 2.5 : 3}>
                     <FormControl size="small"
                         sx={{
                             minWidth: 130,
@@ -123,23 +128,40 @@ const SearchFlights = () => {
                     </FormControl>
                 </Grid>
 
-                <Grid item xs={12} sm={5}>
+                <Grid item md={2}
+                    sx={{
+                        display: type === "hr" ? { xs: 'none', md: 'flex' } : 'none',
+                        justifyContent: 'center'
+                    }}>
+                    <LoadingButton
+                        color="primary"
+                        onClick={handleSearch}
+                        endIcon={<Search />}
+                        // loading={isFetching}
+                        loadingPosition="end"
+                        variant="contained"
+                    >
+                        Sign In
+                    </LoadingButton>
+                </Grid>
+
+                <Grid item xs={12} sm={5} md={type === "hr" ? 3 : 5}>
                     <Autocomplete
                         disablePortal
                         id="combo-box-demo"
-                        options={Airports}
-                        renderInput={(params) => <TextField {...params} label="Origin"
+                        options={airports}
+                        renderInput={(params) => <TextField {...params} label="Origin" size="small"
                             InputProps={{
                                 ...params.InputProps,
                                 endAdornment: (
-                                    <FlightTakeoff />
+                                    <FlightTakeoff sx={{ position: 'absolute', right: 20 }} />
                                 ),
                             }}
                         />}
                     />
                 </Grid>
 
-                <Grid item xs={12} sm={2}
+                <Grid item xs={12} sm={2} md={type === "hr" ? 1 : 2}
                     sx={{
                         display: 'flex',
                         justifyContent: 'center',
@@ -149,23 +171,23 @@ const SearchFlights = () => {
                     <Button variant="outlined"><CompareArrows /></Button>
                 </Grid>
 
-                <Grid item xs={12} sm={5}>
+                <Grid item xs={12} sm={5} md={type === "hr" ? 3 : 5}>
                     <Autocomplete
                         disablePortal
                         id="combo-box-demo"
-                        options={Airports}
-                        renderInput={(params) => <TextField {...params} label="Destination"
+                        options={airports}
+                        renderInput={(params) => <TextField {...params} label="Destination" size="small"
                             InputProps={{
                                 ...params.InputProps,
                                 endAdornment: (
-                                    <FlightLand />
+                                    <FlightLand sx={{ position: 'absolute', right: 20 }} />
                                 ),
                             }}
                         />}
                     />
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid item xs={12} md={type === "hr" ? 5 : 12}>
 
                     {searchItems.trip === 1 &&
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -176,7 +198,7 @@ const SearchFlights = () => {
                                     onChange={(newValue) => {
                                         setValue2(newValue);
                                     }}
-                                    renderInput={(params) => <TextField {...params} fullWidth />}
+                                    renderInput={(params) => <TextField {...params} fullWidth size="small" />}
                                 />
                             </Box>
                             <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
@@ -186,7 +208,7 @@ const SearchFlights = () => {
                                     onChange={(newValue) => {
                                         setValue2(newValue);
                                     }}
-                                    renderInput={(params) => <TextField {...params} fullWidth />}
+                                    renderInput={(params) => <TextField {...params} fullWidth size="small" />}
                                 />
                             </Box>
                         </LocalizationProvider>
@@ -205,9 +227,9 @@ const SearchFlights = () => {
                                     }}
                                     renderInput={(startProps, endProps) => (
                                         <React.Fragment>
-                                            <TextField {...startProps} fullWidth />
+                                            <TextField {...startProps} fullWidth size="small" />
                                             <Box sx={{ mx: 2 }}> to </Box>
-                                            <TextField {...endProps} fullWidth />
+                                            <TextField {...endProps} fullWidth size="small" />
                                         </React.Fragment>
                                     )}
                                 />
@@ -222,9 +244,9 @@ const SearchFlights = () => {
                                     }}
                                     renderInput={(startProps, endProps) => (
                                         <React.Fragment>
-                                            <TextField {...startProps} fullWidth />
+                                            <TextField {...startProps} fullWidth size="small" />
                                             <Box sx={{ mx: 2 }}> to </Box>
-                                            <TextField {...endProps} fullWidth />
+                                            <TextField {...endProps} fullWidth size="small" />
                                         </React.Fragment>
                                     )}
                                 />
@@ -234,19 +256,18 @@ const SearchFlights = () => {
 
                 </Grid>
 
-                <Grid xs={12}
+                <Grid item xs={12}
                     sx={{
-                        display: 'flex',
+                        display: type === "hr" ? { xs: 'flex', md: 'none' } : 'flex',
                         justifyContent: 'center'
                     }}>
                     <LoadingButton
                         sx={{
-                            mt: 2,
-                            mb: 2,
+                            mt: 1,
                             width: { xs: '100%', sm: '60%' }
                         }}
                         color="primary"
-                        // onClick={handleLogin}
+                        onClick={handleSearch}
                         endIcon={<Search />}
                         // loading={isFetching}
                         loadingPosition="end"
@@ -263,9 +284,3 @@ const SearchFlights = () => {
 }
 
 export default SearchFlights
-
-const Airports = [
-    { label: 'Colombo (CMB)', id: "CMB" },
-    { label: 'AMSTERDAM (AMS)', id: "AMS" },
-
-];

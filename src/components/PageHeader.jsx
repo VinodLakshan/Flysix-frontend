@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Logo from './Logo';
 import { useSelector } from 'react-redux';
 
-const pages = ['something', 'something1'];
+const pages = [];
 const settings = ['Logout'];
 
 const PageHeader = () => {

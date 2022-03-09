@@ -1,7 +1,10 @@
 import { Box, Container, Grid, Stack, Typography } from '@mui/material'
 import React from 'react'
+import Footer from '../components/Footer'
+import Newsletter from '../components/Newsletter'
 import PageHeader from '../components/PageHeader'
 import SearchFlights from '../components/SearchFlights'
+import TopDestinations from '../components/TopDestinations'
 
 const Home = () => {
     return (
@@ -17,7 +20,7 @@ const Home = () => {
                     mt: { xs: 2, md: 4 },
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: { xs: 'center', md: 'flex-start' }
+                    alignItems: { xs: 'center', md: 'flex-start' },
                 }}
             >
 
@@ -26,8 +29,11 @@ const Home = () => {
 
                 </Typography>
 
-                <SearchFlights />
+                <SearchFlights type="vt" />
             </Box>
+            <TopDestinations />
+            <Newsletter />
+            <Footer />
         </Stack >
     )
 }
