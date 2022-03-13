@@ -24,7 +24,15 @@ const FlightFilters = () => {
     };
 
     return (
-        <Paper elevation={5} sx={{ maxWidth: 350, maxHeight: { sm: 600, md: '100%' }, width: "80vw", px: 2, overflow: 'auto' }}>
+        <Paper elevation={5}
+            sx={{
+                borderRadius: 2,
+                minWidth: { sm: 250, xs: 300 },
+                maxWidth: 350,
+                maxHeight: { xs: 600, sm: 600, md: '100%' },
+                px: 2,
+                overflow: 'auto'
+            }}>
             <nav aria-label="number of results">
                 <List >
                     <ListItem sx={{
@@ -129,7 +137,7 @@ const FlightFilters = () => {
                                 value={journeyDuration}
                                 onChange={handleJourneyDurationChange}
                                 valueLabelDisplay="auto"
-                                valueLabelFormat={() => `${journeyDuration} hrs.`}
+                                valueLabelFormat={() => `${journeyDuration} hr`}
                             />
                         </Box>
                     </ListItem>

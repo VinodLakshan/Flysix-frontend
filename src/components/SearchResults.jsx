@@ -1,12 +1,14 @@
 import React from 'react'
-import { Paper } from '@mui/material';
+import { Paper, Stack } from '@mui/material';
+import FlightResult from './FlightResult';
 
 
 const SearchResults = () => {
     return (
-        <Paper elevation={5}>
-
-        </Paper>
+        <Stack spacing={2} sx={{ width: { md: "60vw" }, maxWidth: 900 }}>
+            <FlightResult />
+            <FlightResult />
+        </Stack>
     )
 }
 

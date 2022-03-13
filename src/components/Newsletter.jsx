@@ -41,7 +41,7 @@ const Newsletter = () => {
                         autoComplete="email"
                         sx={{ pb: 2, width: { sm: '60%', xs: '80%' } }}
                     />
-                    <Button variant="outlined" href="/login" >Lets go!</Button>
+                    <Button variant="outlined" href="/login" >Count me in!</Button>
                 </Grid>
             </Grid>
         </Paper>

@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../utils/ApiCalls';
 import { LoadingButton } from '@mui/lab';
+import MuiPhoneNumber from 'material-ui-phone-number';
 
 const SectionStyle = styled(Card)(({ theme }) => ({
     width: '100%',
@@ -39,6 +40,7 @@ const Register = () => {
             if (user.password === user.conPassword) {
 
                 const res = await register(dispatch, user);
+                console.log(user)
 
                 switch (res.status) {
                     case 200:
@@ -128,7 +130,6 @@ const Register = () => {
                                         id="username"
                                         label="Username"
                                         name="username"
-                                        autoFocus
                                         onChange={(e) => setUser({ ...user, [e.target.name]: e.target.value })}
                                     />
                                 </Grid>
@@ -144,7 +145,6 @@ const Register = () => {
                                 label="Email"
                                 name="email"
                                 autoComplete="email"
-                                autoFocus
                                 onChange={(e) => setUser({ ...user, [e.target.name]: e.target.value })}
                             />
 
@@ -156,19 +156,20 @@ const Register = () => {
                                 label="Address"
                                 name="address"
                                 autoComplete="address"
-                                autoFocus
                                 onChange={(e) => setUser({ ...user, [e.target.name]: e.target.value })}
                             />
 
-                            <TextField
+                            <MuiPhoneNumber
                                 margin="normal"
                                 required
+                                disableAreaCodes
                                 fullWidth
                                 name="mobileNo"
-                                label="Mobile No."
-                                type="tel"
-                                id="mobileNo"
-                                onChange={(e) => setUser({ ...user, [e.target.name]: e.target.value })}
+                                variant="outlined"
+                                label="Mobile Number"
+                                countryCodeEditable={false}
+                                defaultCountry={'us'}
+                                onChange={(e) => setUser({ ...user, ["mobileNo"]: e })}
                             />
 
                             <Grid container spacing={1}>

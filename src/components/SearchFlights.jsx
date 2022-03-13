@@ -24,7 +24,7 @@ const SearchFlights = ({ type }) => {
                 display: 'flex',
                 justifyContent: 'center',
                 borderRadius: 2,
-                maxWidth: type === "hr" ? 1000 : 800
+                maxWidth: type === "hr" ? 1100 : 800
             }}
         >
             <Grid container columnSpacing={1} rowSpacing={{ xs: 3, sm: 4 }} sx={{ p: 4 }}>
@@ -141,7 +141,7 @@ const SearchFlights = ({ type }) => {
                         loadingPosition="end"
                         variant="contained"
                     >
-                        Sign In
+                        Search
                     </LoadingButton>
                 </Grid>
 
@@ -273,7 +273,7 @@ const SearchFlights = ({ type }) => {
                         loadingPosition="end"
                         variant="contained"
                     >
-                        Sign In
+                        Search
                     </LoadingButton>
                 </Grid>
 

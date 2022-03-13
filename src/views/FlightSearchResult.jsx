@@ -1,4 +1,4 @@
-import { Button, Grid, Modal, Stack } from '@mui/material'
+import { Button, Grid, Modal, Stack, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
 import FlightFilters from '../components/FlightFilters'
@@ -7,7 +7,7 @@ import PageHeader from '../components/PageHeader'
 import SearchFlights from '../components/SearchFlights'
 import SearchResults from '../components/SearchResults'
 
-const FlightResult = () => {
+const FlightSearchResult = () => {
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -17,25 +17,21 @@ const FlightResult = () => {
         <Stack
             direction="column"
             alignItems='center'
+            spacing={4}
         >
             <PageHeader />
-            <Grid container rowSpacing={2} sx={{
-                mt: 2,
-                px: { xs: 2, md: 8 }
-            }}>
-                <Grid item xs={12} sx={{
-                    display: 'flex',
-                    justifyContent: "center",
-                }}>
-                    <SearchFlights type="hr" />
-                </Grid>
+            <Box sx={{ px: 2 }}>
+                <SearchFlights type="hr" />
+            </Box>
 
-                <Grid item md={4} sx={{ display: { md: 'flex', xs: 'none' } }}>
+            <Stack direction={{ xs: 'column', sm: 'column', md: 'row' }} spacing={2} sx={{ px: 2 }}>
+
+                <Box sx={{ display: { md: 'flex', xs: 'none' } }} >
                     <FlightFilters />
-                </Grid>
-
-                <Grid item xs={1} sx={{ display: { md: 'none', xs: 'flex' } }}>
+                </Box>
+                <Stack direction="row" alignItems="center" sx={{ display: { md: 'none', xs: 'flex' }, pl: 2 }}>
                     <Button variant="contained" onClick={handleOpen}>Filters</Button>
+                    <Typography variant="body2" sx={{ pl: 2 }}> 21 of 50 results</Typography>
                     <Modal
                         sx={{
                             display: 'flex',
@@ -52,15 +48,16 @@ const FlightResult = () => {
                             <FlightFilters />
                         </Box>
                     </Modal>
-                </Grid>
-                <Grid item xs={8}>
+                </Stack>
+
+                <Box sx={{ px: 2 }}>
                     <SearchResults />
-                </Grid>
-            </Grid>
+                </Box>
+            </Stack>
             <Footer />
 
-        </Stack>
+        </Stack >
     )
 }
 
-export default FlightResult
+export default FlightSearchResult
