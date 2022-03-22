@@ -12,21 +12,24 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Logo from './Logo';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { logout } from '../redux/userRedux';
 
 const pages = [];
-const settings = ['Logout'];
 
 const PageHeader = () => {
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+    const location = useLocation();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const { currentUser } = useSelector(state => state.user);
 
     React.useEffect(() => {
-
         if (currentUser) setIsLoggedIn(true);
 
     }, [currentUser])
@@ -46,6 +49,11 @@ const PageHeader = () => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate("/")
+    }
 
     return (
         <AppBar position="static" elevation={1}
@@ -115,7 +123,13 @@ const PageHeader = () => {
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        {!isLoggedIn && <Button variant="outlined" size="large" href="/login" >Sign In</Button>}
+                        {!isLoggedIn &&
+                            <Link to="/login" state={{ from: location.pathname }} style={{ textDecoration: "none" }}>
+                                <Button variant="outlined" size="large">
+                                    Sign In
+                                </Button>
+                            </Link>
+                        }
                         {isLoggedIn &&
                             <Box>
                                 <Tooltip title="Account">
@@ -139,17 +153,15 @@ const PageHeader = () => {
                                     open={Boolean(anchorElUser)}
                                     onClose={handleCloseUserMenu}
                                 >
-                                    {settings.map((setting) => (
-                                        <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                            <Typography >{setting}</Typography>
-                                        </MenuItem>
-                                    ))}
+                                    <MenuItem key="logout" onClick={handleCloseUserMenu}>
+                                        <Typography onClick={handleLogout}>Logout</Typography>
+                                    </MenuItem>
                                 </Menu>
                             </Box>}
                     </Box>
                 </Toolbar>
             </Container>
-        </AppBar>
+        </AppBar >
     )
 }
 

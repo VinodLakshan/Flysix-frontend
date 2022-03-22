@@ -10,7 +10,8 @@ const CDivider = styled(Divider)(() => ({
 }))
 
 
-const FareSummary = () => {
+const FareSummary = ({ price, travellers }) => {
+
     return (
         <Paper elevation={5}
             sx={{
@@ -27,7 +28,8 @@ const FareSummary = () => {
                 </Stack>
                 <CDivider sx={{ backgroundColor: 'primary.main' }} />
 
-                <Chip label={`Travellers: ${10} ${Const.Adult}, ${10} ${Const.Child}, ${10}  ${Const.Infant}`}
+                <Chip label={`Travellers: ${travellers.adults} ${Const.Adult}, 
+                ${travellers.children} ${Const.Child}, ${travellers.infants}  ${Const.Infant}`}
                     variant="outlined" />
 
                 <Divider />
@@ -36,12 +38,12 @@ const FareSummary = () => {
                         <Typography variant="body1">Fare</Typography>
                         <Typography variant='body2'>Base fare & taxes</Typography>
                     </Box>
-                    <Typography variant="subtitle1">$ 1,882,000</Typography>
+                    <Typography variant="subtitle1">{price.currency} {price.total}</Typography>
                 </Stack>
                 <Divider />
                 <Stack direction="row" px={1} justifyContent="space-between" alignItems="center" spacing={1}>
                     <Typography variant="body1">Booking Fee</Typography>
-                    <Typography variant="body1">$ 0</Typography>
+                    <Typography variant="body1">{price.currency} 0</Typography>
                 </Stack>
                 <Divider />
                 <Stack direction="row" px={1} justifyContent="space-between" alignItems="flex-end" spacing={1}>
@@ -49,7 +51,7 @@ const FareSummary = () => {
                         <Typography variant="body1">Promotions</Typography>
                         <Typography variant='body2'>10% member discount</Typography>
                     </Box>
-                    <Typography variant="subtitle1">$ 10,000</Typography>
+                    <Typography variant="subtitle1">{price.currency} 0</Typography>
                 </Stack>
 
             </Stack>
@@ -64,7 +66,7 @@ const FareSummary = () => {
                     style={{ color: "white" }}
                 >
                     <Typography variant="h6">Grand Total</Typography>
-                    <Typography variant="h6">$ 10,000</Typography>
+                    <Typography variant="h6">{price.currency} {price.total}</Typography>
                 </Stack>
             </Box>
         </Paper>

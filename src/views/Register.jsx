@@ -169,7 +169,7 @@ const Register = () => {
                                 label="Mobile Number"
                                 countryCodeEditable={false}
                                 defaultCountry={'us'}
-                                onChange={(e) => setUser({ ...user, ["mobileNo"]: e })}
+                                onChange={(e) => setUser({ ...user, "mobileNo": e })}
                             />
 
                             <Grid container spacing={1}>

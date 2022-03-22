@@ -6,6 +6,7 @@ const userSlice = createSlice(
         initialState: {
             currentUser: null,
             isFetching: false,
+            selectedBooking: {},
             error: false
         },
         reducers: {
@@ -18,11 +19,20 @@ const userSlice = createSlice(
             },
             authFailure: (state) => {
                 state.isFetching = false;
-                state.error = true
+                state.error = true;
+            },
+            logout: (state) => {
+                state.currentUser = null;
+            },
+            updateSelectedBooking: (state, action) => {
+                state.selectedBooking = action.payload;
+            },
+            updatePassengers: (state, action) => {
+                state.selectedBooking.passengers = action.payload;
             }
         }
     }
 );
 
-export const { authStart, authSuccess, authFailure } = userSlice.actions;
+export const { authStart, authSuccess, authFailure, logout, updateSelectedBooking, updatePassengers } = userSlice.actions;
 export default userSlice.reducer;

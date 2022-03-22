@@ -1,19 +1,79 @@
 import { CompareArrows, FlightLand, FlightTakeoff, Search } from '@mui/icons-material'
-import { Autocomplete, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField } from '@mui/material'
+import { Alert, Autocomplete, Button, Dialog, DialogContent, DialogTitle, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Slider, Snackbar, Stack, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react'
+import React, { useEffect } from 'react'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { DesktopDatePicker, DesktopDateRangePicker, LoadingButton, LocalizationProvider, MobileDatePicker, MobileDateRangePicker } from '@mui/lab';
 import { airports } from "../Data";
+import { useDispatch, useSelector } from 'react-redux';
+import { findFlights } from '../utils/ApiCalls';
+import { useNavigate } from 'react-router-dom';
+import { Class, Trips } from '../Properties';
+import { formateDateToSimpleDate, getSliderMarks } from '../utils/Common';
 
 const SearchFlights = ({ type }) => {
 
-    const [value, setValue] = React.useState([null, null]);
-    const [value2, setValue2] = React.useState(null);
-    const [searchItems, setSearchItems] = React.useState({ trip: 2 });
+    const [alertError, setAlertError] = React.useState("");
+    const [showErrorAlert, setShowErrorAlert] = React.useState(false);
+    const [passengerDialogOpen, setPassengerDialogOpen] = React.useState(false);
+
+    const [searchItems, setSearchItems] = React.useState({
+        trip: Trips.round,
+        class: Class.economy,
+        origin: null,
+        destination: null,
+        departDate: null,
+        returnDate: null,
+        adults: 1,
+        children: 0,
+        infants: 0
+    });
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { isFetching, searchCriteria } = useSelector(state => state.flight);
+
+    useEffect(() => {
+
+        if (searchCriteria) setSearchItems(searchCriteria);
+
+    }, [searchCriteria])
 
 
     const handleSearch = async () => {
+
+        setShowErrorAlert(false);
+
+        if (searchItems.origin && searchItems.destination && searchItems.departDate &&
+            ((searchItems.trip === Trips.oneWay) || (searchItems.trip === Trips.round && searchItems.returnDate))) {
+
+            if (searchItems.origin.id !== searchItems.destination.id) {
+
+                const res = await findFlights(dispatch, searchItems);
+
+                switch (res.status) {
+                    case 200:
+                        navigate("/flightResults", { state: { flightList: res.data } });
+                        break;
+
+                    default:
+                        setAlertError(res.error);
+                        setShowErrorAlert(true);
+                        break;
+                }
+
+
+            } else {
+                setAlertError("Origin and destination cannot be the same.");
+                setShowErrorAlert(true);
+            }
+
+
+        } else {
+            setAlertError("Please fill all the required fields.");
+            setShowErrorAlert(true);
+        }
+
 
     }
 
@@ -30,7 +90,7 @@ const SearchFlights = ({ type }) => {
             <Grid container columnSpacing={1} rowSpacing={{ xs: 3, sm: 4 }} sx={{ p: 4 }}>
                 <Grid item xs={6} sm={3} md={type === "hr" ? 2.5 : 3}>
 
-                    <FormControl size="small"
+                    <FormControl size="small" required
                         sx={{
                             minWidth: 130,
                         }}
@@ -46,43 +106,104 @@ const SearchFlights = ({ type }) => {
                             autoWidth
                             onChange={(e) => { setSearchItems({ ...searchItems, [e.target.name]: e.target.value }) }}
                         >
-                            <MenuItem value={1}>One Way</MenuItem>
-                            <MenuItem value={2}>Round Trip</MenuItem>
-                            <MenuItem value={3}>Multi City</MenuItem>
+                            <MenuItem value={Trips.oneWay}>{Trips.oneWay}</MenuItem>
+                            <MenuItem value={Trips.round}>{Trips.round}</MenuItem>
+                            <MenuItem value={Trips.multi}>{Trips.multi}</MenuItem>
                         </Select>
 
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={6} sm={3} md={type === "hr" ? 2.5 : 3}>
-                    <FormControl size="small"
+                    <FormControl size="small" required
                         sx={{
                             minWidth: 130,
+                            maxWidth: 130,
                         }}
                     >
-
-                        <InputLabel id="demo-simple-select-label">Passengers</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={1}
+                        <TextField
                             label="Passengers"
-                            autoWidth
-                        // onChange={handleChange}
-                        >
-                            <MenuItem value="1">1 Adult</MenuItem>
-                            <MenuItem value="2">2 Adult</MenuItem>
-                            <MenuItem value="3">3 Adult</MenuItem>
-                            <MenuItem value="4">4 Adult</MenuItem>
-                        </Select>
+                            size="small"
+                            required
+                            value={`${searchItems.adults + searchItems.children + searchItems.infants} Travellers`}
+                            onClick={() => setPassengerDialogOpen(true)}
+                        />
 
+                        <Dialog disableEscapeKeyDown open={passengerDialogOpen}
+                            onClose={() => setPassengerDialogOpen(false)}
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column"
+                            }}
+                        >
+                            <DialogTitle>Passengers</DialogTitle>
+                            <DialogContent>
+                                <Stack sx={{ width: 280, height: 225, pt: 1, px: 2 }}
+                                    spacing={4}
+                                >
+                                    <Stack direction="row" spacing={3} alignItems="flex-start" justifyContent="space-between">
+                                        <Slider
+                                            sx={{
+                                                maxWidth: 150
+                                            }}
+                                            name="adults"
+                                            value={searchItems.adults}
+                                            step={1}
+                                            marks={getSliderMarks(1, 5)}
+                                            min={1}
+                                            max={5}
+                                            onChange={(e) => {
+                                                setSearchItems({ ...searchItems, [e.target.name]: e.target.value })
+                                                console.log(searchItems)
+                                            }}
+                                            valueLabelDisplay="off"
+                                        />
+                                        <Typography variant='h6' sx={{ width: 90 }}> Adults </Typography>
+                                    </Stack>
+                                    <Stack direction="row" spacing={3} alignItems="flex-start" justifyContent="space-between">
+                                        <Slider
+                                            sx={{
+                                                maxWidth: 150
+                                            }}
+                                            name="children"
+                                            value={searchItems.children}
+                                            step={1}
+                                            marks={getSliderMarks(0, 5)}
+                                            min={0}
+                                            max={5}
+                                            onChange={(e) => setSearchItems({ ...searchItems, [e.target.name]: e.target.value })}
+                                            valueLabelDisplay="off"
+                                        />
+                                        <Typography variant='h6' sx={{ width: 90 }}> Children </Typography>
+                                    </Stack>
+                                    <Stack direction="row" spacing={3} alignItems="flex-start" justifyContent="space-between">
+                                        <Slider
+                                            sx={{
+                                                maxWidth: 150
+                                            }}
+                                            name="infants"
+                                            value={searchItems.infants}
+                                            step={1}
+                                            marks={getSliderMarks(0, 5)}
+                                            min={0}
+                                            max={5}
+                                            onChange={(e) => setSearchItems({ ...searchItems, [e.target.name]: e.target.value })}
+                                            valueLabelDisplay="off"
+                                        />
+                                        <Typography variant='h6' sx={{ width: 90 }}> Infants </Typography>
+                                    </Stack>
+                                </Stack>
+
+                            </DialogContent>
+                        </Dialog>
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={6} sm={3} md={type === "hr" ? 2.5 : 3}>
-                    <FormControl size="small"
+                    <FormControl size="small" required
                         sx={{
                             minWidth: 130,
+                            maxWidth: 130,
                         }}
                     >
 
@@ -90,15 +211,16 @@ const SearchFlights = ({ type }) => {
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={'Economy'}
+                            name="class"
+                            value={searchItems.class}
                             label="Passengers"
                             autoWidth
-                        // onChange={handleChange}
+                            onChange={(e) => { setSearchItems({ ...searchItems, [e.target.name]: e.target.value }) }}
                         >
-                            <MenuItem value="Economy">Economy</MenuItem>
-                            <MenuItem value="Premium Economy">Premium Economy</MenuItem>
-                            <MenuItem value="Business">Business</MenuItem>
-                            <MenuItem value="First">First</MenuItem>
+                            <MenuItem value={Class.economy}>{Class.economy}</MenuItem>
+                            <MenuItem value={Class.premiumEconomy}>{Class.premiumEconomy}</MenuItem>
+                            <MenuItem value={Class.business}>{Class.business}</MenuItem>
+                            <MenuItem value={Class.first}>{Class.first}</MenuItem>
                         </Select>
 
                     </FormControl>
@@ -116,9 +238,8 @@ const SearchFlights = ({ type }) => {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             value={'2'}
-                            label="Passengers"
+                            label="Bags"
                             autoWidth
-                        // onChange={handleChange}
                         >
                             <MenuItem value={1}>1 Bag</MenuItem>
                             <MenuItem value={2}>2 Bags</MenuItem>
@@ -137,7 +258,7 @@ const SearchFlights = ({ type }) => {
                         color="primary"
                         onClick={handleSearch}
                         endIcon={<Search />}
-                        // loading={isFetching}
+                        loading={isFetching}
                         loadingPosition="end"
                         variant="contained"
                     >
@@ -148,9 +269,12 @@ const SearchFlights = ({ type }) => {
                 <Grid item xs={12} sm={5} md={type === "hr" ? 3 : 5}>
                     <Autocomplete
                         disablePortal
-                        id="combo-box-demo"
+                        id="input-origin"
                         options={airports}
-                        renderInput={(params) => <TextField {...params} label="Origin" size="small"
+                        value={searchItems.origin}
+                        onChange={(e, newValue) => setSearchItems({ ...searchItems, "origin": newValue })}
+                        isOptionEqualToValue={(option, value) => option.id === value.id}
+                        renderInput={(params) => <TextField required {...params} label="Origin" size="small"
                             InputProps={{
                                 ...params.InputProps,
                                 endAdornment: (
@@ -166,17 +290,23 @@ const SearchFlights = ({ type }) => {
                         display: 'flex',
                         justifyContent: 'center',
                         border: '1px solid primary.main',
-
                     }}>
-                    <Button variant="outlined"><CompareArrows /></Button>
+                    <Button variant="outlined" onClick={() => setSearchItems({
+                        ...searchItems,
+                        "origin": searchItems.destination,
+                        "destination": searchItems.origin
+                    })}><CompareArrows /></Button>
                 </Grid>
 
                 <Grid item xs={12} sm={5} md={type === "hr" ? 3 : 5}>
                     <Autocomplete
                         disablePortal
-                        id="combo-box-demo"
+                        id="input-destination"
                         options={airports}
-                        renderInput={(params) => <TextField {...params} label="Destination" size="small"
+                        value={searchItems.destination}
+                        onChange={(e, newValue) => setSearchItems({ ...searchItems, "destination": newValue })}
+                        isOptionEqualToValue={(option, value) => option.id === value.id}
+                        renderInput={(params) => <TextField required {...params} label="Destination" size="small"
                             InputProps={{
                                 ...params.InputProps,
                                 endAdornment: (
@@ -189,14 +319,14 @@ const SearchFlights = ({ type }) => {
 
                 <Grid item xs={12} md={type === "hr" ? 5 : 12}>
 
-                    {searchItems.trip === 1 &&
+                    {searchItems.trip === Trips.oneWay &&
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                                 <DesktopDatePicker
                                     label="Depart Date"
-                                    value={value2}
+                                    value={searchItems.departDate}
                                     onChange={(newValue) => {
-                                        setValue2(newValue);
+                                        setSearchItems({ ...searchItems, "departDate": formateDateToSimpleDate(newValue) });
                                     }}
                                     renderInput={(params) => <TextField {...params} fullWidth size="small" />}
                                 />
@@ -204,9 +334,9 @@ const SearchFlights = ({ type }) => {
                             <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
                                 <MobileDatePicker
                                     label="Depart Date"
-                                    value={value2}
+                                    value={searchItems.departDate}
                                     onChange={(newValue) => {
-                                        setValue2(newValue);
+                                        setSearchItems({ ...searchItems, "departDate": formateDateToSimpleDate(newValue) });
                                     }}
                                     renderInput={(params) => <TextField {...params} fullWidth size="small" />}
                                 />
@@ -214,16 +344,17 @@ const SearchFlights = ({ type }) => {
                         </LocalizationProvider>
                     }
 
-                    {searchItems.trip !== 1 &&
+                    {searchItems.trip === Trips.round &&
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
 
                             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                                 <DesktopDateRangePicker
                                     startText="Depart Date"
                                     endText="Return Date"
-                                    value={value}
+                                    value={[searchItems.departDate, searchItems.returnDate]}
                                     onChange={(newValue) => {
-                                        setValue(newValue);
+                                        newValue[0] && setSearchItems({ ...searchItems, "departDate": formateDateToSimpleDate(newValue[0]) });
+                                        newValue[1] && setSearchItems({ ...searchItems, "returnDate": formateDateToSimpleDate(newValue[1]) });
                                     }}
                                     renderInput={(startProps, endProps) => (
                                         <React.Fragment>
@@ -238,9 +369,10 @@ const SearchFlights = ({ type }) => {
                                 <MobileDateRangePicker
                                     startText="Depart Date"
                                     endText="Return Date"
-                                    value={value}
+                                    value={[searchItems.departDate, searchItems.returnDate]}
                                     onChange={(newValue) => {
-                                        setValue(newValue);
+                                        newValue[0] && setSearchItems({ ...searchItems, "departDate": formateDateToSimpleDate(newValue[0]) });
+                                        newValue[1] && setSearchItems({ ...searchItems, "returnDate": formateDateToSimpleDate(newValue[1]) });
                                     }}
                                     renderInput={(startProps, endProps) => (
                                         <React.Fragment>
@@ -269,7 +401,7 @@ const SearchFlights = ({ type }) => {
                         color="primary"
                         onClick={handleSearch}
                         endIcon={<Search />}
-                        // loading={isFetching}
+                        loading={isFetching}
                         loadingPosition="end"
                         variant="contained"
                     >
@@ -279,6 +411,11 @@ const SearchFlights = ({ type }) => {
 
             </Grid>
 
+            <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} open={showErrorAlert} autoHideDuration={6000} onClose={() => setShowErrorAlert(false)}>
+                <Alert variant="filled" onClose={() => setShowErrorAlert(false)} severity="error" sx={{ width: 400 }}>
+                    {alertError}
+                </Alert>
+            </Snackbar>
         </Paper >
     )
 }

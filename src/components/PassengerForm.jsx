@@ -11,10 +11,40 @@ import { DesktopDatePicker, LoadingButton, LocalizationProvider, MobileDatePicke
 import React from 'react'
 import MuiPhoneNumber from 'material-ui-phone-number';
 
-const PassengerForm = ({ type, count }) => {
+const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
 
-    const [value2, setValue2] = React.useState(null);
-    const [title, setTitle] = React.useState("Mr");
+    const handleTitleChange = (event) => {
+        passengerDetails.title = event.target.value;
+        changePassengerDetails(passengerDetails)
+    }
+
+    const handleFirstNameChange = (event) => {
+        passengerDetails.firstName = event.target.value;
+        changePassengerDetails(passengerDetails)
+    }
+
+    const handleLastNameChange = (event) => {
+        passengerDetails.lastName = event.target.value;
+        changePassengerDetails(passengerDetails)
+    }
+
+    const handleEmailChange = (event) => {
+        passengerDetails.email = event.target.value;
+        changePassengerDetails(passengerDetails)
+    }
+    const handleMobileNoChange = (event) => {
+        passengerDetails.mobileNo = event.target.value;
+        changePassengerDetails(passengerDetails)
+    }
+
+    const handlePassportNumberChange = (event) => {
+        passengerDetails.passportNumber = event.target.value;
+        changePassengerDetails(passengerDetails)
+    }
+    const handleIssuedCountryChange = (event) => {
+        passengerDetails.issuedCOuntry = event.target.value;
+        changePassengerDetails(passengerDetails)
+    }
 
     return (
         <Grid container justifyContent="center" rowSpacing={4} columnGap={2}>
@@ -22,17 +52,17 @@ const PassengerForm = ({ type, count }) => {
                 <FormControl fullWidth size="small">
                     <InputLabel required id="age-select-label">Title</InputLabel>
                     <Select
-                        value={title}
+                        value={passengerDetails.title}
                         label="Age"
-                    // onChange={handleChange}
+                        onChange={handleTitleChange}
                     >
-                        <MenuItem sx={{ display: type !== Const.Adult ? "none" : "flex" }} value="Mr">Mr</MenuItem>
-                        <MenuItem sx={{ display: type === Const.Adult ? "none" : "flex" }} value="Master">Master</MenuItem>
+                        <MenuItem sx={{ display: passengerDetails.type !== Const.Adult ? "none" : "flex" }} value="Mr">Mr</MenuItem>
+                        <MenuItem sx={{ display: passengerDetails.type === Const.Adult ? "none" : "flex" }} value="Master">Master</MenuItem>
                         <MenuItem value="Ms">Ms</MenuItem>
-                        <MenuItem sx={{ display: type !== Const.Adult ? "none" : "flex" }} value="Mrs">Mrs</MenuItem>
-                        <MenuItem sx={{ display: type !== Const.Adult ? "none" : "flex" }} value="Dr">Dr</MenuItem>
-                        <MenuItem sx={{ display: type !== Const.Adult ? "none" : "flex" }} value="Rev">Rev</MenuItem>
-                        <MenuItem sx={{ display: type !== Const.Adult ? "none" : "flex" }} value="Prof">Prof</MenuItem>
+                        <MenuItem sx={{ display: passengerDetails.type !== Const.Adult ? "none" : "flex" }} value="Mrs">Mrs</MenuItem>
+                        <MenuItem sx={{ display: passengerDetails.type !== Const.Adult ? "none" : "flex" }} value="Dr">Dr</MenuItem>
+                        <MenuItem sx={{ display: passengerDetails.type !== Const.Adult ? "none" : "flex" }} value="Rev">Rev</MenuItem>
+                        <MenuItem sx={{ display: passengerDetails.type !== Const.Adult ? "none" : "flex" }} value="Prof">Prof</MenuItem>
                     </Select>
                 </FormControl>
             </Grid>
@@ -40,6 +70,7 @@ const PassengerForm = ({ type, count }) => {
             <Grid item xs={12} sm={4}>
                 <TextField required
                     fullWidth
+                    onBlur={handleFirstNameChange}
                     label="First Name"
                     id="first-name"
                     size="small"
@@ -49,6 +80,7 @@ const PassengerForm = ({ type, count }) => {
             <Grid item xs={12} sm={4}>
                 <TextField required
                     fullWidth
+                    onBlur={handleLastNameChange}
                     label="Last Name"
                     id="last-name"
                     size="small"
@@ -61,9 +93,10 @@ const PassengerForm = ({ type, count }) => {
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         <DesktopDatePicker
                             label="Date of Birth"
-                            value={value2}
+                            value={passengerDetails.dateOfBirth}
                             onChange={(newValue) => {
-                                setValue2(newValue);
+                                passengerDetails.dateOfBirth = newValue;
+                                changePassengerDetails(passengerDetails)
                             }}
                             renderInput={(params) => <TextField {...params} required fullWidth size="small" />}
                         />
@@ -71,9 +104,10 @@ const PassengerForm = ({ type, count }) => {
                     <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
                         <MobileDatePicker
                             label="Date of Birth"
-                            value={value2}
+                            value={passengerDetails.dateOfBirth}
                             onChange={(newValue) => {
-                                setValue2(newValue);
+                                passengerDetails.dateOfBirth = newValue;
+                                changePassengerDetails(passengerDetails)
                             }}
                             renderInput={(params) => <TextField {...params} required fullWidth size="small" />}
                         />
@@ -84,6 +118,7 @@ const PassengerForm = ({ type, count }) => {
             <Grid item xs={12} sm={5.25}>
                 <TextField required
                     fullWidth
+                    onBlur={handlePassportNumberChange}
                     label="Passport Number"
                     id="passport-number"
                     size="small"
@@ -95,9 +130,10 @@ const PassengerForm = ({ type, count }) => {
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         <DesktopDatePicker
                             label="Expire Date"
-                            value={value2}
+                            value={passengerDetails.passportExpireDate}
                             onChange={(newValue) => {
-                                setValue2(newValue);
+                                passengerDetails.passportExpireDate = newValue;
+                                changePassengerDetails(passengerDetails)
                             }}
                             renderInput={(params) => <TextField {...params} required fullWidth size="small" />}
                         />
@@ -105,9 +141,10 @@ const PassengerForm = ({ type, count }) => {
                     <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
                         <MobileDatePicker
                             label="Expire Date"
-                            value={value2}
+                            value={passengerDetails.passportExpireDate}
                             onChange={(newValue) => {
-                                setValue2(newValue);
+                                passengerDetails.passportExpireDate = newValue;
+                                changePassengerDetails(passengerDetails)
                             }}
                             renderInput={(params) => <TextField {...params} required fullWidth size="small" />}
                         />
@@ -118,15 +155,17 @@ const PassengerForm = ({ type, count }) => {
             <Grid item xs={12} sm={5.25}>
                 <TextField required
                     fullWidth
+                    onBlur={handleIssuedCountryChange}
                     label="Issued Country"
                     id="issued-country"
                     size="small"
                 />
             </Grid>
 
-            {(type === Const.Adult && count === 1) && <Grid item xs={12} sm={5.25}>
+            {(passengerDetails.type === Const.Adult && passengerDetails.count === 1) && <Grid item xs={12} sm={5.25}>
                 <TextField required
                     fullWidth
+                    onBlur={handleEmailChange}
                     label="Email"
                     id="email"
                     size="small"
@@ -134,10 +173,11 @@ const PassengerForm = ({ type, count }) => {
                 />
             </Grid>}
 
-            {(type === Const.Adult && count === 1) && <Grid item xs={12} sm={5.25}>
+            {(passengerDetails.type === Const.Adult && passengerDetails.count === 1) && <Grid item xs={12} sm={5.25}>
                 <MuiPhoneNumber
                     disableAreaCodes
                     fullWidth
+                    onBlur={handleMobileNoChange}
                     variant="outlined"
                     size="small"
                     label="Mobile Number"

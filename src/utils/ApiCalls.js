@@ -1,6 +1,10 @@
 import axios from "axios";
 import { authFailure, authStart, authSuccess } from "../redux/userRedux"
+import { fetchingStart, fetchingSuccess, fetchError } from "../redux/flightRedux"
 import { Properties } from './../Properties'
+import { testRes } from './../Data'
+
+// ================================ Auth ============================================================
 
 export const login = async (dispatch, user) => {
 
@@ -29,3 +33,19 @@ const sendAuth = async (dispatch, user, method) => {
     }
 }
 
+// ================================ Flight ============================================================
+
+export const findFlights = async (dispatch, searchCriteria) => {
+
+    dispatch(fetchingStart())
+
+    try {
+
+        dispatch(fetchingSuccess(searchCriteria));
+        return { status: 200, data: testRes };
+
+    } catch (ex) {
+        dispatch(fetchError())
+        return { status: 400, error: "this is the error" };
+    }
+}

@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import ThemeProvider from './theme'
 import { Provider } from 'react-redux'
-import store from './redux/store';
+import { store, persister } from './redux/store';
 import App from './App';
+import { PersistGate } from 'redux-persist/integration/react';
 
 ReactDOM.render(
   <ThemeProvider>
     <Provider store={store}>
-      <App />
+      <PersistGate loading={null} persistor={persister}>
+        <App />
+      </PersistGate>
     </Provider>
   </ThemeProvider>,
   document.getElementById('root')

@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
 import { Checkbox, Chip, FormControl, FormControlLabel, FormGroup, Paper, Radio, RadioGroup, Slider, styled, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateFilteredFlightList } from '../redux/flightRedux';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -11,17 +13,69 @@ const CDivider = styled(Divider)(() => ({
     marginBottom: 10
 }))
 
-const FlightFilters = () => {
-    const [priceRange, setPriceRange] = React.useState([100, 1000]);
+const FlightFilters = ({ flightList, filterData }) => {
+
     const [journeyDuration, setJourneyDuration] = React.useState(5);
+    const [customizedFilters, setCustomizedFilters] = React.useState({
+        prices: {
+            min: filterData.prices.min,
+            max: filterData.prices.max
+        },
+        airlines: new Set(filterData.airlines.map(airline => { return airline.code }))
+    });
+    const { filteredFlightList } = useSelector(state => state.flight);
+    const dispatch = useDispatch();
 
     const handlePriceChange = (event, newValue) => {
-        setPriceRange(newValue);
+        setCustomizedFilters({
+            ...customizedFilters,
+            "prices": {
+                min: newValue[0],
+                max: newValue[1]
+            }
+        });
+
     };
+
+    const handleAirlinesChange = (event) => {
+
+        const existingAirlines = customizedFilters.airlines;
+
+        if (event.target.checked) {
+            existingAirlines.add(event.target.value);
+
+        } else {
+            existingAirlines.delete(event.target.value);
+        }
+
+        setCustomizedFilters({
+            ...customizedFilters,
+            "airlines": existingAirlines
+        })
+
+    }
 
     const handleJourneyDurationChange = (event, newValue) => {
         setJourneyDuration(newValue);
     };
+
+    const triggerFilters = () => {
+
+        const newFilteredList = flightList.filter(flight => {
+            if (flight.price.total > customizedFilters.prices.min && flight.price.total < customizedFilters.prices.max &&
+                customizedFilters.airlines.has(flight.airline.code))
+                return flight;
+        });
+
+
+        dispatch(updateFilteredFlightList(newFilteredList))
+    }
+
+    useEffect(() => {
+        triggerFilters();
+
+    }, [customizedFilters])
+
 
     return (
         <Paper elevation={5}
@@ -38,7 +92,7 @@ const FlightFilters = () => {
                     <ListItem sx={{
                         display: 'flex', justifyContent: 'center'
                     }}>
-                        <Typography variant="body1"> 21 of 50 results</Typography>
+                        <Typography variant="body1"> {filteredFlightList.length} of {flightList.length} results</Typography>
                     </ListItem>
 
                     <CDivider variant="middle" sx={{ backgroundColor: 'primary.light' }} />
@@ -49,17 +103,17 @@ const FlightFilters = () => {
                                 Price
                             </Typography>
                             <Typography id="track-inverted-slider" variant="body2">
-                                $ {priceRange[0]} - $ {priceRange[1]}
+                                $ {customizedFilters.prices.min} - $ {customizedFilters.prices.max}
                             </Typography>
                             <Slider
-                                min={0}
-                                step={10}
-                                max={1000}
+                                min={filterData ? filterData.prices.min : 0}
+                                step={50}
+                                max={filterData ? filterData.prices.max : 1000}
                                 getAriaLabel={() => 'Price'}
-                                value={priceRange}
+                                value={[customizedFilters.prices.min, customizedFilters.prices.max]}
                                 onChange={handlePriceChange}
                                 valueLabelDisplay="auto"
-                                valueLabelFormat={() => `$ ${priceRange[0]} - $ ${priceRange[1]}`}
+                                valueLabelFormat={() => `$ ${customizedFilters.prices.min} - $ ${customizedFilters.prices.max}`}
 
                             />
                         </Box>
@@ -109,11 +163,13 @@ const FlightFilters = () => {
                             }}>
 
                                 <FormGroup sx={{ gap: -1 }}>
-                                    <FormControlLabel control={<Checkbox />} label="Emirates" />
-                                    <FormControlLabel control={<Checkbox />} label="Quatar Airways" />
-                                    <FormControlLabel control={<Checkbox />} label="Itihad Airways" />
-                                    <FormControlLabel control={<Checkbox />} label="British Airways" />
-                                    <FormControlLabel control={<Checkbox />} label="Sri Lankan Airlines" />
+                                    {
+                                        filterData.airlines.map((airline, index) => {
+                                            return < FormControlLabel key={index} control={<Checkbox value={airline.code} onChange={handleAirlinesChange} defaultChecked />}
+                                                label={<Typography variant="body2" sx={{ fontSize: "13px" }}>{airline.name}</Typography>} />
+                                        })
+                                    }
+
                                 </FormGroup>
                             </Box>
                         </Box>
@@ -164,6 +220,7 @@ const FlightFilters = () => {
                 </List>
 
             </nav>
+
         </Paper >
     )
 }

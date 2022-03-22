@@ -1,13 +1,37 @@
 import { Button, Stack } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import DiscountForm from '../components/DiscountForm'
 import FareSummary from '../components/FareSummary'
 import Footer from '../components/Footer'
 import PageHeader from '../components/PageHeader'
 import PassengerDetails from '../components/PassengerDetails'
 import TripDetails from '../components/TripDetails'
+import StripePayment from '../components/StripePayment'
+import { updatePassengers } from '../redux/userRedux'
 
 const FlightDetails = () => {
+
+    const { selectedBooking } = useSelector(state => state.user);
+    const { searchCriteria } = useSelector(state => state.flight);
+    const [passengers, setPassengers] = React.useState([]);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (!selectedBooking.selectedFlight) {
+            navigate("/")
+
+        } else {
+            dispatch(updatePassengers(passengers))
+        }
+
+
+
+    }, [selectedBooking, passengers])
+
+
     return (
         <Stack
             direction="column"
@@ -21,20 +45,26 @@ const FlightDetails = () => {
                 sx={{ px: 2 }}
             >
 
+                {
+                    selectedBooking &&
+
+                    <Stack spacing={2}>
+                        <TripDetails tripData={selectedBooking.selectedFlight} />
+                        <PassengerDetails passengers={passengers} setPassengers={setPassengers} />
+
+                    </Stack>
+                }
+
                 <Stack spacing={2}>
-
-                    <TripDetails />
-                    <PassengerDetails />
-
-                </Stack>
-
-                <Stack spacing={2}>
-                    <FareSummary />
+                    <FareSummary price={selectedBooking.selectedFlight.price} travellers={{
+                        adults: searchCriteria.adults,
+                        children: searchCriteria.children,
+                        infants: searchCriteria.infants,
+                    }}
+                    />
                     <DiscountForm />
 
-                    <Button variant="contained">
-                        Continue to Payment
-                    </Button>
+                    <StripePayment price={120} />
 
                 </Stack>
 
