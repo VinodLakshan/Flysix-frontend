@@ -329,6 +329,9 @@ const SearchFlights = ({ type }) => {
                                     onChange={(newValue) => {
                                         setSearchItems({ ...searchItems, "departDate": formateDateToSimpleDate(newValue) });
                                     }}
+                                    InputProps={{
+                                        readOnly: true,
+                                    }}
                                     renderInput={(params) => <TextField {...params} fullWidth size="small" />}
                                 />
                             </Box>
@@ -338,6 +341,9 @@ const SearchFlights = ({ type }) => {
                                     value={searchItems.departDate}
                                     onChange={(newValue) => {
                                         setSearchItems({ ...searchItems, "departDate": formateDateToSimpleDate(newValue) });
+                                    }}
+                                    InputProps={{
+                                        readOnly: true,
                                     }}
                                     renderInput={(params) => <TextField {...params} fullWidth size="small" />}
                                 />
@@ -357,6 +363,9 @@ const SearchFlights = ({ type }) => {
                                         newValue[0] && setSearchItems({ ...searchItems, "departDate": formateDateToSimpleDate(newValue[0]) });
                                         newValue[1] && setSearchItems({ ...searchItems, "returnDate": formateDateToSimpleDate(newValue[1]) });
                                     }}
+                                    InputProps={{
+                                        readOnly: true,
+                                    }}
                                     renderInput={(startProps, endProps) => (
                                         <React.Fragment>
                                             <TextField {...startProps} fullWidth size="small" />
@@ -374,6 +383,9 @@ const SearchFlights = ({ type }) => {
                                     onChange={(newValue) => {
                                         newValue[0] && setSearchItems({ ...searchItems, "departDate": formateDateToSimpleDate(newValue[0]) });
                                         newValue[1] && setSearchItems({ ...searchItems, "returnDate": formateDateToSimpleDate(newValue[1]) });
+                                    }}
+                                    InputProps={{
+                                        readOnly: true,
                                     }}
                                     renderInput={(startProps, endProps) => (
                                         <React.Fragment>

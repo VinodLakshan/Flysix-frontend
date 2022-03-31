@@ -77,6 +77,9 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                             value={passenger.dateOfBirth}
                             onChange={(newValue) => setPassenger({ ...passenger, "dateOfBirth": formateDateToSimpleDate(newValue) })}
                             onBlur={() => changePassengerDetails(passenger)}
+                            InputProps={{
+                                readOnly: true,
+                            }}
                             renderInput={(params) => <TextField {...params} required fullWidth size="small" />}
                         />
                     </Box>
@@ -86,6 +89,9 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                             value={passenger.dateOfBirth}
                             onChange={(newValue) => setPassenger({ ...passenger, "dateOfBirth": formateDateToSimpleDate(newValue) })}
                             onBlur={() => changePassengerDetails(passenger)}
+                            InputProps={{
+                                readOnly: true,
+                            }}
                             renderInput={(params) => <TextField {...params} required fullWidth size="small" />}
                         />
                     </Box>
@@ -114,6 +120,9 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                             value={passenger.passportExpireDate}
                             onChange={(newValue) => setPassenger({ ...passenger, "passportExpireDate": formateDateToSimpleDate(newValue) })}
                             onBlur={() => changePassengerDetails(passenger)}
+                            InputProps={{
+                                readOnly: true,
+                            }}
                             renderInput={(params) => <TextField {...params} required fullWidth size="small" />}
                         />
                     </Box>
@@ -124,6 +133,9 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                             value={passenger.passportExpireDate}
                             onChange={(newValue) => setPassenger({ ...passenger, "passportExpireDate": formateDateToSimpleDate(newValue) })}
                             onBlur={() => changePassengerDetails(passenger)}
+                            InputProps={{
+                                readOnly: true,
+                            }}
                             renderInput={(params) => <TextField {...params} required fullWidth size="small" />}
                         />
                     </Box>
