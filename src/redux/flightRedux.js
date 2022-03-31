@@ -23,11 +23,15 @@ const flightSlice = createSlice(
             },
             updateFilteredFlightList: (state, action) => {
                 state.filteredFlightList = action.payload;
+            },
+            clearFlightData: (state) => {
+                state.searchCriteria = null;
+                state.filteredFlightList = [];
             }
 
         }
     }
 );
 
-export const { fetchingStart, fetchingSuccess, fetchError, updateFilteredFlightList } = flightSlice.actions;
+export const { fetchingStart, fetchingSuccess, fetchError, updateFilteredFlightList, clearFlightData } = flightSlice.actions;
 export default flightSlice.reducer;

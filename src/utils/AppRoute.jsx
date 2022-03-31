@@ -5,6 +5,7 @@ import Register from '../views/Register';
 import Home from '../views/Home';
 import FlightSearchResult from '../views/FlightSearchResult';
 import FlightDetails from '../views/FlightDetails';
+import SuccessPayment from '../components/SuccessPayment';
 
 const AppRoute = () => {
     return (
@@ -15,6 +16,7 @@ const AppRoute = () => {
                 <Route exact path="/login" element={<Login />} />
                 <Route exact path="/flightResults" element={<FlightSearchResult />} />
                 <Route exact path="/passenger" element={<FlightDetails />} />
+                <Route exact path="/successPayment/:bookingId" element={<SuccessPayment />} />
             </Routes>
         </Router>
     )

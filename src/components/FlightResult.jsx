@@ -1,5 +1,5 @@
 import { Luggage } from '@mui/icons-material'
-import { Avatar, Chip, Divider, Grid, Paper, Stack, styled, Typography, Button, Box } from '@mui/material'
+import { Avatar, Chip, Divider, Grid, Paper, Stack, styled, Typography, Button, Box, Snackbar, Alert } from '@mui/material'
 import React from 'react'
 import Trip from './Trip'
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,25 +16,43 @@ const FlightResult = ({ flight }) => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [alertError, setAlertError] = React.useState("");
+    const [showErrorAlert, setShowErrorAlert] = React.useState(false);
+    const { searchCriteria } = useSelector(state => state.flight);
+    const { currentUser } = useSelector(state => state.user);
 
     const handleClick = (bookingType) => {
-        const selectedBooking = {
-            bookingType: bookingType,
-            selectedFlight: flight
+
+        if (currentUser) {
+
+            const selectedBooking = {
+                bookingId: null,
+                reservedBy: currentUser,
+                bookingType: bookingType,
+                status: Const.Unconfirmed,
+                flight: flight,
+                bookingClass: searchCriteria.bookingClass,
+                trip: searchCriteria.trip,
+                payment: flight.price,
+            }
+            dispatch(updateSelectedBooking(selectedBooking))
+            navigate("/passenger");
+
+        } else {
+            setAlertError("User must be logged-in, in order to make a booking.");
+            setShowErrorAlert(true);
         }
-        dispatch(updateSelectedBooking(selectedBooking))
-        navigate("/passenger");
     }
 
     return (
         <Paper elevation={5} sx={{ borderRadius: 2, p: 1, pb: 2 }}>
             <Grid container alignItems="center">
                 <Grid item xs={12} sm={12} md={9.5} sx={{ pr: 1 }}>
-                    <Trip tripType="outbound" tripData={flight.depart} />
+                    <Trip tripType="outbound" tripData={flight.departTrip} />
 
-                    {flight.return && <Box>
+                    {flight.returnTrip && <Box>
                         <CDivider />
-                        <Trip tripType="inbound" tripData={flight.return} />
+                        <Trip tripType="inbound" tripData={flight.returnTrip} />
                     </Box>}
 
                 </Grid>
@@ -81,6 +99,12 @@ const FlightResult = ({ flight }) => {
                     </Grid>
                 </Grid>
             </Grid>
+
+            <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} open={showErrorAlert} autoHideDuration={6000} onClose={() => setShowErrorAlert(false)}>
+                <Alert variant="filled" onClose={() => setShowErrorAlert(false)} severity="error" sx={{ width: 400 }}>
+                    {alertError}
+                </Alert>
+            </Snackbar>
         </Paper >
     )
 }

@@ -29,16 +29,16 @@ const TripDetails = ({ tripData }) => {
                 <Stack direction="row" sx={{ py: 2 }} alignItems={{ xs: "flex-start", sm: "center" }}>
                     <img src="/static/icons/flightR.png" width={25} alt="FlightR" />
                     <Stack spacing={1} sx={{ pl: 1 }} direction={{ xs: "column", sm: "row" }}>
-                        <CTypo variant="h6">{tripData.depart.origin.label} - {tripData.depart.destination.label}</CTypo>
+                        <CTypo variant="h6">{tripData.departTrip.origin.label} - {tripData.departTrip.destination.label}</CTypo>
                         <CTypo variant="h6" sx={{ display: { xs: "none", sm: "flex" } }}>|</CTypo>
-                        <CTypo variant="h6"> {formatDateToDate(tripData.depart.departAt, Const.dateWithFullDay)}</CTypo>
+                        <CTypo variant="h6"> {formatDateToDate(tripData.departTrip.departAt, Const.dateWithFullDay)}</CTypo>
                     </Stack>
                 </Stack>
 
                 <Stack sx={{ pl: { md: 6 } }} justifyContent="flex-start">
 
                     {
-                        tripData.depart.segments.map((data, index) => {
+                        tripData.departTrip.segments.map((data, index) => {
 
                             return (<Box key={index}>
                                 <Trip tripData={data} />
@@ -56,21 +56,21 @@ const TripDetails = ({ tripData }) => {
                 </Stack>
 
                 {
-                    tripData.return &&
+                    tripData.returnTrip &&
                     <Box>
                         <Stack direction="row" sx={{ py: 2 }} alignItems={{ xs: "flex-start", sm: "center" }}>
                             <img src="/static/icons/flightL.png" width={25} alt="FlightR" />
                             <Stack spacing={1} sx={{ pl: 1 }} direction={{ xs: "column", sm: "row" }}>
-                                <CTypo variant="h6">{tripData.return.origin.label} - {tripData.return.destination.label}</CTypo>
+                                <CTypo variant="h6">{tripData.returnTrip.origin.label} - {tripData.returnTrip.destination.label}</CTypo>
                                 <CTypo variant="h6" sx={{ display: { xs: "none", sm: "flex" } }}>|</CTypo>
-                                <CTypo variant="h6">{formatDateToDate(tripData.return.departAt, Const.dateWithFullDay)} </CTypo>
+                                <CTypo variant="h6">{formatDateToDate(tripData.returnTrip.departAt, Const.dateWithFullDay)} </CTypo>
                             </Stack>
                         </Stack>
 
                         <Stack sx={{ pl: { md: 6 } }} justifyContent="flex-start">
 
                             {
-                                tripData.return.segments.map((data, index) => {
+                                tripData.returnTrip.segments.map((data, index) => {
 
                                     return (<Box key={index}>
                                         <Trip tripData={data} />

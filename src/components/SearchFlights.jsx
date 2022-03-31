@@ -19,7 +19,7 @@ const SearchFlights = ({ type }) => {
 
     const [searchItems, setSearchItems] = React.useState({
         trip: Trips.round,
-        class: Class.economy,
+        bookingClass: Class.economy,
         origin: null,
         destination: null,
         departDate: null,
@@ -154,7 +154,6 @@ const SearchFlights = ({ type }) => {
                                             max={5}
                                             onChange={(e) => {
                                                 setSearchItems({ ...searchItems, [e.target.name]: e.target.value })
-                                                console.log(searchItems)
                                             }}
                                             valueLabelDisplay="off"
                                         />
@@ -211,11 +210,13 @@ const SearchFlights = ({ type }) => {
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            name="class"
-                            value={searchItems.class}
-                            label="Passengers"
+                            name="bookingClass"
+                            value={searchItems.bookingClass}
+                            label="bookingClass"
                             autoWidth
-                            onChange={(e) => { setSearchItems({ ...searchItems, [e.target.name]: e.target.value }) }}
+                            onChange={(e) => {
+                                setSearchItems({ ...searchItems, [e.target.name]: e.target.value })
+                            }}
                         >
                             <MenuItem value={Class.economy}>{Class.economy}</MenuItem>
                             <MenuItem value={Class.premiumEconomy}>{Class.premiumEconomy}</MenuItem>

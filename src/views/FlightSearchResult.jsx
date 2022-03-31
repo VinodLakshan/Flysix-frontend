@@ -124,7 +124,7 @@ const FlightSearchResult = () => {
                     code: "",
                     name: ""
                 },
-                depart: {
+                departTrip: {
                     origin: "",
                     destination: "",
                     departAt: "",
@@ -132,7 +132,7 @@ const FlightSearchResult = () => {
                     duration: "",
                     segments: []
                 },
-                return: {
+                returnTrip: {
                     origin: "",
                     destination: "",
                     departAt: "",
@@ -156,30 +156,30 @@ const FlightSearchResult = () => {
             organizedFlight.airline.name = dictionaries.carriers[flight.validatingAirlineCodes[0]];
 
             // ==== depart ====
-            organizedFlight.depart.origin = codeToAirportName(flight.itineraries[0].segments[0].departure.iataCode);
-            organizedFlight.depart.departAt = formatStringToDate(flight.itineraries[0].segments[0].departure.at, Const.dateWithShortDay)
+            organizedFlight.departTrip.origin = codeToAirportName(flight.itineraries[0].segments[0].departure.iataCode);
+            organizedFlight.departTrip.departAt = formatStringToDate(flight.itineraries[0].segments[0].departure.at, Const.dateWithShortDay)
 
             const departIndex = flight.itineraries[0].segments.length - 1;
-            organizedFlight.depart.destination = codeToAirportName(flight.itineraries[0].segments[departIndex].arrival.iataCode);
-            organizedFlight.depart.arriveAt = formatStringToDate(flight.itineraries[0].segments[departIndex].arrival.at, Const.dateWithShortDay)
+            organizedFlight.departTrip.destination = codeToAirportName(flight.itineraries[0].segments[departIndex].arrival.iataCode);
+            organizedFlight.departTrip.arriveAt = formatStringToDate(flight.itineraries[0].segments[departIndex].arrival.at, Const.dateWithShortDay)
 
-            organizedFlight.depart.duration = getPTDuration(flight.itineraries[0].duration);
-            organizedFlight.depart.segments = organizeSegments(flight.itineraries[0].segments)
+            organizedFlight.departTrip.duration = getPTDuration(flight.itineraries[0].duration);
+            organizedFlight.departTrip.segments = organizeSegments(flight.itineraries[0].segments)
 
             // ==== return ====
             if (!flight.oneWay) {
-                organizedFlight.return.origin = codeToAirportName(flight.itineraries[1].segments[0].departure.iataCode);
-                organizedFlight.return.departAt = formatStringToDate(flight.itineraries[1].segments[0].departure.at, Const.dateWithShortDay)
+                organizedFlight.returnTrip.origin = codeToAirportName(flight.itineraries[1].segments[0].departure.iataCode);
+                organizedFlight.returnTrip.departAt = formatStringToDate(flight.itineraries[1].segments[0].departure.at, Const.dateWithShortDay)
 
                 const returnIndex = flight.itineraries[1].segments.length - 1;
-                organizedFlight.return.destination = codeToAirportName(flight.itineraries[1].segments[returnIndex].arrival.iataCode);
-                organizedFlight.return.arriveAt = formatStringToDate(flight.itineraries[1].segments[returnIndex].arrival.at, Const.dateWithShortDay)
+                organizedFlight.returnTrip.destination = codeToAirportName(flight.itineraries[1].segments[returnIndex].arrival.iataCode);
+                organizedFlight.returnTrip.arriveAt = formatStringToDate(flight.itineraries[1].segments[returnIndex].arrival.at, Const.dateWithShortDay)
 
-                organizedFlight.return.duration = getPTDuration(flight.itineraries[1].duration);
-                organizedFlight.return.segments = organizeSegments(flight.itineraries[1].segments)
+                organizedFlight.returnTrip.duration = getPTDuration(flight.itineraries[1].duration);
+                organizedFlight.returnTrip.segments = organizeSegments(flight.itineraries[1].segments)
 
             } else {
-                organizedFlight.return = null;
+                organizedFlight.returnTrip = null;
             }
 
             organizedFlights.push(organizedFlight)
@@ -190,7 +190,6 @@ const FlightSearchResult = () => {
     }
 
     const loadFilters = (flights) => {
-
         const filters = {
             prices: {
                 min: flights[0].price.total,
@@ -198,8 +197,8 @@ const FlightSearchResult = () => {
             },
             airlines: [],
             duration: {
-                min: getHourNumberFromDuration(flights[0].depart.duration),
-                max: getHourNumberFromDuration(flights[0].depart.duration)
+                min: getHourNumberFromDuration(flights[0].departTrip.duration),
+                max: getHourNumberFromDuration(flights[0].departTrip.duration)
             }
         }
 
@@ -215,11 +214,11 @@ const FlightSearchResult = () => {
 
             if (!(filters.airlines.find(airline => airline.code === flight.airline.code))) filters.airlines.push(flight.airline);
 
-            if (getHourNumberFromDuration(flight.depart.duration) < filters.duration.min) {
-                filters.duration.min = getHourNumberFromDuration(flight.depart.duration);
+            if (getHourNumberFromDuration(flight.departTrip.duration) < filters.duration.min) {
+                filters.duration.min = getHourNumberFromDuration(flight.departTrip.duration);
 
-            } else if (getHourNumberFromDuration(flight.depart.duration) > filters.duration.max) {
-                filters.duration.max = getHourNumberFromDuration(flight.depart.duration);
+            } else if (getHourNumberFromDuration(flight.departTrip.duration) > filters.duration.max) {
+                filters.duration.max = getHourNumberFromDuration(flight.departTrip.duration);
             }
 
 
@@ -239,8 +238,8 @@ const FlightSearchResult = () => {
             const organizedFlights = organizeFlights();
             setFlightList(organizedFlights);
             dispatch(updateFilteredFlightList(organizedFlights));
-
             setFilters(loadFilters(organizedFlights));
+
         }
 
     }, [flightData])

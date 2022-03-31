@@ -1,5 +1,5 @@
 import axios from "axios";
-import { authFailure, authStart, authSuccess } from "../redux/userRedux"
+import { authFailure, authStart, authSuccess, paymentSuccess, reservationSuccess } from "../redux/userRedux"
 import { fetchingStart, fetchingSuccess, fetchError } from "../redux/flightRedux"
 import { Properties } from './../Properties'
 import { testRes } from './../Data'
@@ -22,7 +22,7 @@ const sendAuth = async (dispatch, user, method) => {
 
     try {
         const res = await axios.post(`${Properties.backendUrl}/auth/${method}`, user);
-        const data = res.data.user;
+        const data = res.data;
         dispatch(authSuccess(data));
         return { status: res.status }
 
@@ -47,5 +47,64 @@ export const findFlights = async (dispatch, searchCriteria) => {
     } catch (ex) {
         dispatch(fetchError())
         return { status: 400, error: "this is the error" };
+    }
+}
+
+export const saveReservation = async (dispatch, token, reservationDetails) => {
+
+    dispatch(authStart());
+
+    try {
+
+        const res = await axios.post(`${Properties.backendUrl}/booking`, reservationDetails, {
+            headers: {
+                'Authorization': `${token}`
+            },
+        });
+
+        dispatch(reservationSuccess(reservationDetails));
+        return { data: res.data, status: res.status }
+
+    } catch (err) {
+        dispatch(authFailure());
+        return err.response.data
+    }
+}
+
+export const makePayment = async (dispatch, token, paymentDetails) => {
+
+    dispatch(authStart());
+
+    try {
+
+        const res = await axios.post(`${Properties.backendUrl}/payment`, paymentDetails, {
+            headers: {
+                'Authorization': `${token}`
+            },
+        });
+
+        dispatch(paymentSuccess());
+        return { data: res.data, status: res.status }
+
+    } catch (err) {
+        dispatch(authFailure());
+        return err.response.data
+    }
+}
+
+export const makePaymentConfirm = async (token, bookingId) => {
+
+    try {
+
+        const res = await axios.get(`${Properties.backendUrl}/payment/confirm/${bookingId}`, {
+            headers: {
+                'Authorization': `${token}`
+            },
+        });
+
+        return { data: res.data, status: res.status }
+
+    } catch (err) {
+        return err.response.data
     }
 }

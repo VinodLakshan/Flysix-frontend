@@ -8,43 +8,13 @@ import { Const } from './../Properties'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { DesktopDatePicker, LoadingButton, LocalizationProvider, MobileDatePicker } from '@mui/lab';
 
-import React from 'react'
+import React, { useState } from 'react'
 import MuiPhoneNumber from 'material-ui-phone-number';
+import { formateDateToSimpleDate } from '../utils/Common';
 
 const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
 
-    const handleTitleChange = (event) => {
-        passengerDetails.title = event.target.value;
-        changePassengerDetails(passengerDetails)
-    }
-
-    const handleFirstNameChange = (event) => {
-        passengerDetails.firstName = event.target.value;
-        changePassengerDetails(passengerDetails)
-    }
-
-    const handleLastNameChange = (event) => {
-        passengerDetails.lastName = event.target.value;
-        changePassengerDetails(passengerDetails)
-    }
-
-    const handleEmailChange = (event) => {
-        passengerDetails.email = event.target.value;
-        changePassengerDetails(passengerDetails)
-    }
-    const handleMobileNoChange = (event) => {
-        passengerDetails.mobileNo = event.target.value;
-        changePassengerDetails(passengerDetails)
-    }
-
-    const handlePassportNumberChange = (event) => {
-        passengerDetails.passportNumber = event.target.value;
-        changePassengerDetails(passengerDetails)
-    }
-    const handleIssuedCountryChange = (event) => {
-        passengerDetails.issuedCOuntry = event.target.value;
-        changePassengerDetails(passengerDetails)
-    }
+    const [passenger, setPassenger] = useState(passengerDetails)
 
     return (
         <Grid container justifyContent="center" rowSpacing={4} columnGap={2}>
@@ -52,9 +22,13 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                 <FormControl fullWidth size="small">
                     <InputLabel required id="age-select-label">Title</InputLabel>
                     <Select
-                        value={passengerDetails.title}
+                        value={passenger.title}
                         label="Age"
-                        onChange={handleTitleChange}
+                        name="title"
+                        onChange={(e) => {
+                            setPassenger({ ...passenger, [e.target.name]: e.target.value })
+                        }}
+                        onBlur={() => changePassengerDetails(passenger)}
                     >
                         <MenuItem sx={{ display: passengerDetails.type !== Const.Adult ? "none" : "flex" }} value="Mr">Mr</MenuItem>
                         <MenuItem sx={{ display: passengerDetails.type === Const.Adult ? "none" : "flex" }} value="Master">Master</MenuItem>
@@ -70,9 +44,12 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
             <Grid item xs={12} sm={4}>
                 <TextField required
                     fullWidth
-                    onBlur={handleFirstNameChange}
+                    value={passenger.firstName}
+                    onChange={(e) => setPassenger({ ...passenger, [e.target.name]: e.target.value })}
+                    onBlur={() => changePassengerDetails(passenger)}
                     label="First Name"
                     id="first-name"
+                    name="firstName"
                     size="small"
                 />
             </Grid>
@@ -80,9 +57,12 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
             <Grid item xs={12} sm={4}>
                 <TextField required
                     fullWidth
-                    onBlur={handleLastNameChange}
+                    value={passenger.lastName}
+                    onChange={(e) => setPassenger({ ...passenger, [e.target.name]: e.target.value })}
+                    onBlur={() => changePassengerDetails(passenger)}
                     label="Last Name"
                     id="last-name"
+                    name="lastName"
                     size="small"
                 />
             </Grid>
@@ -93,22 +73,19 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         <DesktopDatePicker
                             label="Date of Birth"
-                            value={passengerDetails.dateOfBirth}
-                            onChange={(newValue) => {
-                                passengerDetails.dateOfBirth = newValue;
-                                changePassengerDetails(passengerDetails)
-                            }}
+                            name="dateOfBirth"
+                            value={passenger.dateOfBirth}
+                            onChange={(newValue) => setPassenger({ ...passenger, "dateOfBirth": formateDateToSimpleDate(newValue) })}
+                            onBlur={() => changePassengerDetails(passenger)}
                             renderInput={(params) => <TextField {...params} required fullWidth size="small" />}
                         />
                     </Box>
                     <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
                         <MobileDatePicker
                             label="Date of Birth"
-                            value={passengerDetails.dateOfBirth}
-                            onChange={(newValue) => {
-                                passengerDetails.dateOfBirth = newValue;
-                                changePassengerDetails(passengerDetails)
-                            }}
+                            value={passenger.dateOfBirth}
+                            onChange={(newValue) => setPassenger({ ...passenger, "dateOfBirth": formateDateToSimpleDate(newValue) })}
+                            onBlur={() => changePassengerDetails(passenger)}
                             renderInput={(params) => <TextField {...params} required fullWidth size="small" />}
                         />
                     </Box>
@@ -118,7 +95,10 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
             <Grid item xs={12} sm={5.25}>
                 <TextField required
                     fullWidth
-                    onBlur={handlePassportNumberChange}
+                    value={passenger.passportNo}
+                    onChange={(e) => setPassenger({ ...passenger, [e.target.name]: e.target.value })}
+                    onBlur={() => changePassengerDetails(passenger)}
+                    name="passportNo"
                     label="Passport Number"
                     id="passport-number"
                     size="small"
@@ -130,22 +110,20 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         <DesktopDatePicker
                             label="Expire Date"
-                            value={passengerDetails.passportExpireDate}
-                            onChange={(newValue) => {
-                                passengerDetails.passportExpireDate = newValue;
-                                changePassengerDetails(passengerDetails)
-                            }}
+                            name="passportExpireDate"
+                            value={passenger.passportExpireDate}
+                            onChange={(newValue) => setPassenger({ ...passenger, "passportExpireDate": formateDateToSimpleDate(newValue) })}
+                            onBlur={() => changePassengerDetails(passenger)}
                             renderInput={(params) => <TextField {...params} required fullWidth size="small" />}
                         />
                     </Box>
                     <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
                         <MobileDatePicker
                             label="Expire Date"
-                            value={passengerDetails.passportExpireDate}
-                            onChange={(newValue) => {
-                                passengerDetails.passportExpireDate = newValue;
-                                changePassengerDetails(passengerDetails)
-                            }}
+                            name="passportExpireDate"
+                            value={passenger.passportExpireDate}
+                            onChange={(newValue) => setPassenger({ ...passenger, "passportExpireDate": formateDateToSimpleDate(newValue) })}
+                            onBlur={() => changePassengerDetails(passenger)}
                             renderInput={(params) => <TextField {...params} required fullWidth size="small" />}
                         />
                     </Box>
@@ -155,31 +133,40 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
             <Grid item xs={12} sm={5.25}>
                 <TextField required
                     fullWidth
-                    onBlur={handleIssuedCountryChange}
+                    value={passenger.issuedCountry}
+                    onChange={(e) => setPassenger({ ...passenger, [e.target.name]: e.target.value })}
+                    onBlur={() => changePassengerDetails(passenger)}
                     label="Issued Country"
+                    name="issuedCountry"
                     id="issued-country"
                     size="small"
                 />
             </Grid>
 
-            {(passengerDetails.type === Const.Adult && passengerDetails.count === 1) && <Grid item xs={12} sm={5.25}>
+            {(passenger.type === Const.Adult && passenger.count === 1) && <Grid item xs={12} sm={5.25}>
                 <TextField required
                     fullWidth
-                    onBlur={handleEmailChange}
+                    value={passenger.email}
+                    onChange={(e) => setPassenger({ ...passenger, [e.target.name]: e.target.value })}
+                    onBlur={() => changePassengerDetails(passenger)}
                     label="Email"
+                    name="email"
                     id="email"
                     size="small"
                     helperText="* Your ticket will be sent to this email."
                 />
             </Grid>}
 
-            {(passengerDetails.type === Const.Adult && passengerDetails.count === 1) && <Grid item xs={12} sm={5.25}>
+            {(passenger.type === Const.Adult && passenger.count === 1) && <Grid item xs={12} sm={5.25}>
                 <MuiPhoneNumber
                     disableAreaCodes
                     fullWidth
-                    onBlur={handleMobileNoChange}
+                    value={passenger.mobileNo}
+                    onChange={(newValue) => setPassenger({ ...passenger, "mobileNo": newValue })}
+                    onBlur={() => changePassengerDetails(passenger)}
                     variant="outlined"
                     size="small"
+                    name="mobileNo"
                     label="Mobile Number"
                     countryCodeEditable={false}
                     defaultCountry={'us'} />

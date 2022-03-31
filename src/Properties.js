@@ -12,7 +12,10 @@ export const Const = {
     dateWithFullDay: "EEEE, dd MMM yyyy",
 
     Instant: "Instant",
-    HoldForFree: "HoldForFree"
+    HoldForFree: "HoldForFree",
+
+    Unconfirmed: "Unconfirmed",
+    Confirmed: "Confirmed"
 }
 
 export const Trips = {

@@ -40,7 +40,6 @@ const Register = () => {
             if (user.password === user.conPassword) {
 
                 const res = await register(dispatch, user);
-                console.log(user)
 
                 switch (res.status) {
                     case 200:

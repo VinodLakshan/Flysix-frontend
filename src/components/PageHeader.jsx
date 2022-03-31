@@ -52,6 +52,7 @@ const PageHeader = () => {
 
     const handleLogout = () => {
         dispatch(logout());
+        setIsLoggedIn(false);
         navigate("/")
     }
 
