@@ -80,10 +80,12 @@ const FlightFilters = ({ flightList, filterData }) => {
     return (
         <Paper elevation={5}
             sx={{
+                position: 'sticky',
+                top: 50,
                 borderRadius: 2,
                 minWidth: { sm: 250, xs: 300 },
                 maxWidth: 350,
-                maxHeight: { xs: 600, sm: 600, md: '100%' },
+                height: 'min-content',
                 px: 2,
                 overflow: 'auto'
             }}>

@@ -7,7 +7,7 @@ const userSlice = createSlice(
             currentUser: null,
             token: null,
             isFetching: false,
-            selectedBooking: {},
+            selectedBooking: null,
             error: false
         },
         reducers: {
@@ -41,7 +41,7 @@ const userSlice = createSlice(
                 state.isFetching = false;
             },
             clearSelectedBooking: (state) => {
-                state.selectedBooking = {};
+                state.selectedBooking = null;
             }
         }
     }

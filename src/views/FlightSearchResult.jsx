@@ -167,7 +167,7 @@ const FlightSearchResult = () => {
             organizedFlight.departTrip.segments = organizeSegments(flight.itineraries[0].segments)
 
             // ==== return ====
-            if (!flight.oneWay) {
+            if (flight.itineraries[1]) {
                 organizedFlight.returnTrip.origin = codeToAirportName(flight.itineraries[1].segments[0].departure.iataCode);
                 organizedFlight.returnTrip.departAt = formatStringToDate(flight.itineraries[1].segments[0].departure.at, Const.dateWithShortDay)
 

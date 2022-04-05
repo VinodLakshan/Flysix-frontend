@@ -37,7 +37,9 @@ const Trip = ({ tripType, tripData }) => {
                         <Typography variant="body2"> {tripData.duration} </Typography>
                         {
                             tripData.segments &&
-                            <Typography variant="body2" sx={{ pl: 1 }}> - {tripData.segments.length - 1} Stops </Typography>
+                            <Typography variant="body2" sx={{ pl: 1 }}> - {tripData.segments.length - 1}
+                                {(tripData.segments.length - 1) === 1 ? ' Stop' : ' Stops'}
+                            </Typography>
                         }
                     </Stack>
                     {

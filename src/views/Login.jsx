@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import { LockOpenOutlined, LoginSharp, Send } from '@mui/icons-material';
-import { Alert, Avatar, Button, Card, Container, Grid, Stack, TextField, Typography } from '@mui/material'
+import { LockOpenOutlined, LoginSharp } from '@mui/icons-material';
+import { Alert, Avatar, Card, Container, Grid, Stack, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import AuthHeader from '../components/AuthHeader'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { login } from '../utils/ApiCalls';

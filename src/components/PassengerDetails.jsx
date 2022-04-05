@@ -7,10 +7,9 @@ import { Const } from '../Properties'
 import { formateDateToSimpleDate } from '../utils/Common'
 import PassengerForm from './PassengerForm'
 
-const PassengerDetails = ({ passengers, setPassengers }) => {
+const PassengerDetails = ({ passengers, setPassengers, searchItems, passengerEditable }) => {
 
     const [expanded, setExpanded] = React.useState(false);
-    const { searchCriteria } = useSelector(state => state.flight)
 
     const handleAccordionChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
@@ -45,29 +44,33 @@ const PassengerDetails = ({ passengers, setPassengers }) => {
 
     useEffect(() => {
 
-        const allPassengers = [];
 
-        for (let index = 0; index < searchCriteria.adults; index++) {
-            const passenger = initiatePassenger(Const.Adult + (index + 1), Const.Adult, (index + 1), "Mr");
-            allPassengers.push(passenger);
+        if (searchItems) {
+
+            const allPassengers = [];
+
+            for (let index = 0; index < searchItems.adults; index++) {
+                const passenger = initiatePassenger(Const.Adult + (index + 1), Const.Adult, (index + 1), "Mr");
+                allPassengers.push(passenger);
+
+            }
+
+            for (let index = 0; index < searchItems.children; index++) {
+                const passenger = initiatePassenger(Const.Child + (index + 1), Const.Child, (index + 1), "Master");
+                allPassengers.push(passenger)
+
+            }
+
+            for (let index = 0; index < searchItems.infants; index++) {
+                const passenger = initiatePassenger(Const.Infant + (index + 1), Const.Infant, (index + 1), "Master");
+                allPassengers.push(passenger)
+
+            }
+
+            setPassengers(allPassengers)
 
         }
-
-        for (let index = 0; index < searchCriteria.children; index++) {
-            const passenger = initiatePassenger(Const.Child + (index + 1), Const.Child, (index + 1), "Master");
-            allPassengers.push(passenger)
-
-        }
-
-        for (let index = 0; index < searchCriteria.infants; index++) {
-            const passenger = initiatePassenger(Const.Infant + (index + 1), Const.Infant, (index + 1), "Master");
-            allPassengers.push(passenger)
-
-        }
-
-        setPassengers(allPassengers)
-
-    }, [searchCriteria])
+    }, [searchItems])
 
 
 
@@ -94,7 +97,7 @@ const PassengerDetails = ({ passengers, setPassengers }) => {
                                     </Stack>
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                    <PassengerForm passengerDetails={passenger} changePassengerDetails={changePassengerDetails} />
+                                    <PassengerForm passengerDetails={passenger} changePassengerDetails={changePassengerDetails} passengerEditable={passengerEditable} />
                                 </AccordionDetails>
                             </Accordion>)
 

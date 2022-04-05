@@ -16,7 +16,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { logout } from '../redux/userRedux';
 
-const pages = [];
+const pages = ["Confirm Booking"];
+const pageLinks = ["/confirmBooking"];
 
 const PageHeader = () => {
 
@@ -64,7 +65,7 @@ const PageHeader = () => {
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
 
-                    <Box sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+                    <Box sx={{ flexGrow: 1, mr: 2, display: { xs: 'none', md: 'flex' } }}
                     >
                         <Logo size="sm" />
                     </Box>
@@ -98,11 +99,16 @@ const PageHeader = () => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Button>{page}</Button>
-                                </MenuItem>
-                            ))}
+                            {
+                                isLoggedIn &&
+                                pages.map((page, index) => (
+                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                        <Link to={pageLinks[index]} style={{ textDecoration: "none" }}>
+                                            <Button>{page}</Button>
+                                        </Link>
+                                    </MenuItem>
+                                ))
+                            }
                         </Menu>
                     </Box>
 
@@ -111,16 +117,24 @@ const PageHeader = () => {
                         <Logo size="sm" />
                     </Box>
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'black', display: 'block' }}
-                            >
-                                {page}
-                            </Button>
-                        ))}
+                    <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+                        {
+                            isLoggedIn &&
+
+                            pages.map((page, index) => (
+
+                                <Link to={pageLinks[index]} key={page} style={{ textDecoration: "none" }}>
+                                    <Button
+                                        variant='outlined'
+                                        onClick={handleCloseNavMenu}
+                                        sx={{ my: 2, mr: 2 }}
+                                    >
+                                        {page}
+                                    </Button>
+                                </Link>
+
+                            ))
+                        }
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>

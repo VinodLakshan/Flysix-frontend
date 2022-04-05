@@ -104,7 +104,11 @@ const SearchFlights = ({ type }) => {
                             label="Trip"
                             value={searchItems.trip}
                             autoWidth
-                            onChange={(e) => { setSearchItems({ ...searchItems, [e.target.name]: e.target.value }) }}
+                            onChange={(e) => {
+                                let returnDate = searchItems.returnDate;
+                                if (e.target.value === Trips.oneWay) returnDate = null;
+                                setSearchItems({ ...searchItems, [e.target.name]: e.target.value, "returnDate": returnDate })
+                            }}
                         >
                             <MenuItem value={Trips.oneWay}>{Trips.oneWay}</MenuItem>
                             <MenuItem value={Trips.round}>{Trips.round}</MenuItem>

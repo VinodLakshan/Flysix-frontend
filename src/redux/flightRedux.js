@@ -13,6 +13,9 @@ const flightSlice = createSlice(
             fetchingStart: (state) => {
                 state.isFetching = true;
             },
+            fetchingDone: (state) => {
+                state.isFetching = false;
+            },
             fetchingSuccess: (state, action) => {
                 state.isFetching = false;
                 state.searchCriteria = action.payload
@@ -33,5 +36,5 @@ const flightSlice = createSlice(
     }
 );
 
-export const { fetchingStart, fetchingSuccess, fetchError, updateFilteredFlightList, clearFlightData } = flightSlice.actions;
+export const { fetchingStart, fetchingSuccess, fetchError, updateFilteredFlightList, clearFlightData, fetchingDone } = flightSlice.actions;
 export default flightSlice.reducer;

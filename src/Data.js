@@ -118,9 +118,9 @@ export const topDestinations = [
 
 export const testRes = {
     "meta": {
-        "count": 2,
+        "count": 10,
         "links": {
-            "self": "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=CMB&destinationLocationCode=AMS&departureDate=2022-11-01&returnDate=2022-12-31&adults=1&nonStop=false&max=2"
+            "self": "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2022-11-01&returnDate=2023-01-01&adults=1&nonStop=false&max=10"
         }
     },
     "data": [
@@ -131,60 +131,55 @@ export const testRes = {
             "instantTicketingRequired": false,
             "nonHomogeneous": false,
             "oneWay": false,
-            "lastTicketingDate": "2022-03-19",
+            "lastTicketingDate": "2022-11-01",
             "numberOfBookableSeats": 9,
             "itineraries": [
                 {
-                    "duration": "PT20H40M",
+                    "duration": "PT14H15M",
                     "segments": [
                         {
                             "departure": {
-                                "iataCode": "CMB",
-                                "at": "2022-11-01T21:00:00"
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2022-11-01T11:35:00"
                             },
                             "arrival": {
-                                "iataCode": "ZRH",
-                                "at": "2022-11-02T07:00:00"
+                                "iataCode": "MNL",
+                                "terminal": "2",
+                                "at": "2022-11-01T16:50:00"
                             },
-                            "carrierCode": "LX",
-                            "number": "8333",
+                            "carrierCode": "PR",
+                            "number": "212",
                             "aircraft": {
-                                "code": "343"
+                                "code": "333"
                             },
                             "operating": {
-                                "carrierCode": "WK"
+                                "carrierCode": "PR"
                             },
-                            "duration": "PT13H30M",
-                            "stops": [
-                                {
-                                    "iataCode": "MLE",
-                                    "duration": "PT1H",
-                                    "arrivalAt": "2022-11-02T01:30:00",
-                                    "departureAt": "2022-11-02T02:30:00"
-                                }
-                            ],
+                            "duration": "PT8H15M",
                             "id": "3",
-                            "numberOfStops": 1,
+                            "numberOfStops": 0,
                             "blacklistedInEU": false
                         },
                         {
                             "departure": {
-                                "iataCode": "ZRH",
-                                "at": "2022-11-02T12:30:00"
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2022-11-01T19:20:00"
                             },
                             "arrival": {
-                                "iataCode": "AMS",
-                                "at": "2022-11-02T14:10:00"
+                                "iataCode": "BKK",
+                                "at": "2022-11-01T21:50:00"
                             },
-                            "carrierCode": "LX",
-                            "number": "728",
+                            "carrierCode": "PR",
+                            "number": "732",
                             "aircraft": {
-                                "code": "221"
+                                "code": "321"
                             },
                             "operating": {
-                                "carrierCode": "LX"
+                                "carrierCode": "PR"
                             },
-                            "duration": "PT1H40M",
+                            "duration": "PT3H30M",
                             "id": "4",
                             "numberOfStops": 0,
                             "blacklistedInEU": false
@@ -192,75 +187,52 @@ export const testRes = {
                     ]
                 },
                 {
-                    "duration": "PT16H5M",
+                    "duration": "PT16H15M",
                     "segments": [
                         {
                             "departure": {
-                                "iataCode": "AMS",
-                                "at": "2022-12-31T08:55:00"
+                                "iataCode": "BKK",
+                                "at": "2023-01-01T13:30:00"
                             },
                             "arrival": {
-                                "iataCode": "MUC",
+                                "iataCode": "MNL",
                                 "terminal": "2",
-                                "at": "2022-12-31T10:20:00"
+                                "at": "2023-01-01T18:00:00"
                             },
-                            "carrierCode": "LH",
-                            "number": "2301",
+                            "carrierCode": "PR",
+                            "number": "731",
                             "aircraft": {
-                                "code": "320"
+                                "code": "333"
                             },
                             "operating": {
-                                "carrierCode": "LH"
+                                "carrierCode": "PR"
                             },
-                            "duration": "PT1H25M",
-                            "id": "5",
+                            "duration": "PT3H30M",
+                            "id": "8",
                             "numberOfStops": 0,
                             "blacklistedInEU": false
                         },
                         {
                             "departure": {
-                                "iataCode": "MUC",
-                                "terminal": "2",
-                                "at": "2022-12-31T11:30:00"
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2023-01-01T22:10:00"
                             },
                             "arrival": {
-                                "iataCode": "BOM",
-                                "terminal": "2",
-                                "at": "2022-12-31T23:55:00"
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2023-01-02T09:45:00"
                             },
-                            "carrierCode": "LH",
-                            "number": "766",
+                            "carrierCode": "PR",
+                            "number": "211",
                             "aircraft": {
-                                "code": "359"
+                                "code": "333"
                             },
                             "operating": {
-                                "carrierCode": "LH"
+                                "carrierCode": "PR"
                             },
-                            "duration": "PT7H55M",
-                            "id": "6",
-                            "numberOfStops": 0,
-                            "blacklistedInEU": false
-                        },
-                        {
-                            "departure": {
-                                "iataCode": "BOM",
-                                "terminal": "2",
-                                "at": "2023-01-01T03:10:00"
-                            },
-                            "arrival": {
-                                "iataCode": "CMB",
-                                "at": "2023-01-01T05:30:00"
-                            },
-                            "carrierCode": "UL",
-                            "number": "142",
-                            "aircraft": {
-                                "code": "32A"
-                            },
-                            "operating": {
-                                "carrierCode": "UL"
-                            },
-                            "duration": "PT2H20M",
-                            "id": "7",
+                            "duration": "PT8H35M",
+                            "id": "9",
                             "numberOfStops": 0,
                             "blacklistedInEU": false
                         }
@@ -269,8 +241,8 @@ export const testRes = {
             ],
             "price": {
                 "currency": "EUR",
-                "total": "646.09",
-                "base": "126.00",
+                "total": "560.93",
+                "base": "341.00",
                 "fees": [
                     {
                         "amount": "0.00",
@@ -281,7 +253,7 @@ export const testRes = {
                         "type": "TICKETING"
                     }
                 ],
-                "grandTotal": "646.09"
+                "grandTotal": "560.93"
             },
             "pricingOptions": {
                 "fareType": [
@@ -290,7 +262,7 @@ export const testRes = {
                 "includedCheckedBagsOnly": true
             },
             "validatingAirlineCodes": [
-                "LX"
+                "PR"
             ],
             "travelerPricings": [
                 {
@@ -299,55 +271,48 @@ export const testRes = {
                     "travelerType": "ADULT",
                     "price": {
                         "currency": "EUR",
-                        "total": "646.09",
-                        "base": "126.00"
+                        "total": "560.93",
+                        "base": "341.00"
                     },
                     "fareDetailsBySegment": [
                         {
                             "segmentId": "3",
                             "cabin": "ECONOMY",
-                            "fareBasis": "LNCLK",
-                            "class": "L",
+                            "fareBasis": "TBAU",
+                            "class": "T",
                             "includedCheckedBags": {
-                                "quantity": 1
+                                "weight": 30,
+                                "weightUnit": "KG"
                             }
                         },
                         {
                             "segmentId": "4",
                             "cabin": "ECONOMY",
-                            "fareBasis": "LNCLK",
-                            "brandedFare": "ECOSAVER",
-                            "class": "L",
+                            "fareBasis": "TBAU",
+                            "class": "T",
                             "includedCheckedBags": {
-                                "quantity": 1
+                                "weight": 30,
+                                "weightUnit": "KG"
                             }
                         },
                         {
-                            "segmentId": "5",
+                            "segmentId": "8",
                             "cabin": "ECONOMY",
-                            "fareBasis": "LNCLK",
-                            "class": "L",
+                            "fareBasis": "TBAU",
+                            "class": "T",
                             "includedCheckedBags": {
-                                "quantity": 1
+                                "weight": 30,
+                                "weightUnit": "KG"
                             }
                         },
                         {
-                            "segmentId": "6",
+                            "segmentId": "9",
                             "cabin": "ECONOMY",
-                            "fareBasis": "LNCLK",
-                            "class": "L",
+                            "fareBasis": "TBAU",
+                            "class": "T",
                             "includedCheckedBags": {
-                                "quantity": 1
-                            }
-                        },
-                        {
-                            "segmentId": "7",
-                            "cabin": "ECONOMY",
-                            "fareBasis": "LNCLK",
-                            "brandedFare": "ECOSAVER",
-                            "class": "L",
-                            "includedCheckedBags": {
-                                "quantity": 1
+                                "weight": 30,
+                                "weightUnit": "KG"
                             }
                         }
                     ]
@@ -361,136 +326,108 @@ export const testRes = {
             "instantTicketingRequired": false,
             "nonHomogeneous": false,
             "oneWay": false,
-            "lastTicketingDate": "2022-03-19",
+            "lastTicketingDate": "2022-11-01",
             "numberOfBookableSeats": 9,
             "itineraries": [
                 {
-                    "duration": "PT25H25M",
+                    "duration": "PT28H30M",
                     "segments": [
                         {
                             "departure": {
-                                "iataCode": "CMB",
-                                "at": "2022-11-01T21:00:00"
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2022-11-01T11:35:00"
                             },
                             "arrival": {
-                                "iataCode": "ZRH",
-                                "at": "2022-11-02T07:00:00"
-                            },
-                            "carrierCode": "LX",
-                            "number": "8333",
-                            "aircraft": {
-                                "code": "343"
-                            },
-                            "operating": {
-                                "carrierCode": "WK"
-                            },
-                            "duration": "PT13H30M",
-                            "stops": [
-                                {
-                                    "iataCode": "MLE",
-                                    "duration": "PT1H",
-                                    "arrivalAt": "2022-11-02T01:30:00",
-                                    "departureAt": "2022-11-02T02:30:00"
-                                }
-                            ],
-                            "id": "1",
-                            "numberOfStops": 1,
-                            "blacklistedInEU": false
-                        },
-                        {
-                            "departure": {
-                                "iataCode": "ZRH",
-                                "at": "2022-11-02T17:15:00"
-                            },
-                            "arrival": {
-                                "iataCode": "AMS",
-                                "at": "2022-11-02T18:55:00"
-                            },
-                            "carrierCode": "LX",
-                            "number": "734",
-                            "aircraft": {
-                                "code": "320"
-                            },
-                            "operating": {
-                                "carrierCode": "LX"
-                            },
-                            "duration": "PT1H40M",
-                            "id": "2",
-                            "numberOfStops": 0,
-                            "blacklistedInEU": false
-                        }
-                    ]
-                },
-                {
-                    "duration": "PT16H5M",
-                    "segments": [
-                        {
-                            "departure": {
-                                "iataCode": "AMS",
-                                "at": "2022-12-31T08:55:00"
-                            },
-                            "arrival": {
-                                "iataCode": "MUC",
+                                "iataCode": "MNL",
                                 "terminal": "2",
-                                "at": "2022-12-31T10:20:00"
+                                "at": "2022-11-01T16:50:00"
                             },
-                            "carrierCode": "LH",
-                            "number": "2301",
+                            "carrierCode": "PR",
+                            "number": "212",
                             "aircraft": {
-                                "code": "320"
+                                "code": "333"
                             },
                             "operating": {
-                                "carrierCode": "LH"
+                                "carrierCode": "PR"
                             },
-                            "duration": "PT1H25M",
+                            "duration": "PT8H15M",
                             "id": "5",
                             "numberOfStops": 0,
                             "blacklistedInEU": false
                         },
                         {
                             "departure": {
-                                "iataCode": "MUC",
-                                "terminal": "2",
-                                "at": "2022-12-31T11:30:00"
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2022-11-02T09:45:00"
                             },
                             "arrival": {
-                                "iataCode": "BOM",
-                                "terminal": "2",
-                                "at": "2022-12-31T23:55:00"
+                                "iataCode": "BKK",
+                                "at": "2022-11-02T12:05:00"
                             },
-                            "carrierCode": "LH",
-                            "number": "766",
+                            "carrierCode": "PR",
+                            "number": "730",
                             "aircraft": {
-                                "code": "359"
+                                "code": "333"
                             },
                             "operating": {
-                                "carrierCode": "LH"
+                                "carrierCode": "PR"
                             },
-                            "duration": "PT7H55M",
+                            "duration": "PT3H20M",
                             "id": "6",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                },
+                {
+                    "duration": "PT16H15M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "BKK",
+                                "at": "2023-01-01T13:30:00"
+                            },
+                            "arrival": {
+                                "iataCode": "MNL",
+                                "terminal": "2",
+                                "at": "2023-01-01T18:00:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "731",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT3H30M",
+                            "id": "8",
                             "numberOfStops": 0,
                             "blacklistedInEU": false
                         },
                         {
                             "departure": {
-                                "iataCode": "BOM",
-                                "terminal": "2",
-                                "at": "2023-01-01T03:10:00"
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2023-01-01T22:10:00"
                             },
                             "arrival": {
-                                "iataCode": "CMB",
-                                "at": "2023-01-01T05:30:00"
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2023-01-02T09:45:00"
                             },
-                            "carrierCode": "UL",
-                            "number": "142",
+                            "carrierCode": "PR",
+                            "number": "211",
                             "aircraft": {
-                                "code": "32A"
+                                "code": "333"
                             },
                             "operating": {
-                                "carrierCode": "UL"
+                                "carrierCode": "PR"
                             },
-                            "duration": "PT2H20M",
-                            "id": "7",
+                            "duration": "PT8H35M",
+                            "id": "9",
                             "numberOfStops": 0,
                             "blacklistedInEU": false
                         }
@@ -499,8 +436,8 @@ export const testRes = {
             ],
             "price": {
                 "currency": "EUR",
-                "total": "646.09",
-                "base": "126.00",
+                "total": "560.93",
+                "base": "341.00",
                 "fees": [
                     {
                         "amount": "0.00",
@@ -511,7 +448,7 @@ export const testRes = {
                         "type": "TICKETING"
                     }
                 ],
-                "grandTotal": "646.09"
+                "grandTotal": "560.93"
             },
             "pricingOptions": {
                 "fareType": [
@@ -520,7 +457,7 @@ export const testRes = {
                 "includedCheckedBagsOnly": true
             },
             "validatingAirlineCodes": [
-                "LX"
+                "PR"
             ],
             "travelerPricings": [
                 {
@@ -529,55 +466,1541 @@ export const testRes = {
                     "travelerType": "ADULT",
                     "price": {
                         "currency": "EUR",
-                        "total": "646.09",
-                        "base": "126.00"
+                        "total": "560.93",
+                        "base": "341.00"
                     },
                     "fareDetailsBySegment": [
                         {
-                            "segmentId": "1",
-                            "cabin": "ECONOMY",
-                            "fareBasis": "LNCLK",
-                            "class": "L",
-                            "includedCheckedBags": {
-                                "quantity": 1
-                            }
-                        },
-                        {
-                            "segmentId": "2",
-                            "cabin": "ECONOMY",
-                            "fareBasis": "LNCLK",
-                            "brandedFare": "ECOSAVER",
-                            "class": "L",
-                            "includedCheckedBags": {
-                                "quantity": 1
-                            }
-                        },
-                        {
                             "segmentId": "5",
                             "cabin": "ECONOMY",
-                            "fareBasis": "LNCLK",
-                            "class": "L",
+                            "fareBasis": "TBAU",
+                            "class": "T",
                             "includedCheckedBags": {
-                                "quantity": 1
+                                "weight": 30,
+                                "weightUnit": "KG"
                             }
                         },
                         {
                             "segmentId": "6",
                             "cabin": "ECONOMY",
-                            "fareBasis": "LNCLK",
-                            "class": "L",
+                            "fareBasis": "TBAU",
+                            "class": "T",
                             "includedCheckedBags": {
-                                "quantity": 1
+                                "weight": 30,
+                                "weightUnit": "KG"
                             }
                         },
                         {
+                            "segmentId": "8",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "9",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "flight-offer",
+            "id": "3",
+            "source": "GDS",
+            "instantTicketingRequired": false,
+            "nonHomogeneous": false,
+            "oneWay": false,
+            "lastTicketingDate": "2022-11-01",
+            "numberOfBookableSeats": 9,
+            "itineraries": [
+                {
+                    "duration": "PT14H15M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2022-11-01T11:35:00"
+                            },
+                            "arrival": {
+                                "iataCode": "MNL",
+                                "terminal": "2",
+                                "at": "2022-11-01T16:50:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "212",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT8H15M",
+                            "id": "3",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2022-11-01T19:20:00"
+                            },
+                            "arrival": {
+                                "iataCode": "BKK",
+                                "at": "2022-11-01T21:50:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "732",
+                            "aircraft": {
+                                "code": "321"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT3H30M",
+                            "id": "4",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                },
+                {
+                    "duration": "PT30H55M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "BKK",
+                                "at": "2023-01-01T22:50:00"
+                            },
+                            "arrival": {
+                                "iataCode": "MNL",
+                                "terminal": "2",
+                                "at": "2023-01-02T03:15:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "733",
+                            "aircraft": {
+                                "code": "321"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT3H25M",
+                            "id": "13",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2023-01-02T22:10:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2023-01-03T09:45:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "211",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT8H35M",
+                            "id": "14",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                }
+            ],
+            "price": {
+                "currency": "EUR",
+                "total": "560.93",
+                "base": "341.00",
+                "fees": [
+                    {
+                        "amount": "0.00",
+                        "type": "SUPPLIER"
+                    },
+                    {
+                        "amount": "0.00",
+                        "type": "TICKETING"
+                    }
+                ],
+                "grandTotal": "560.93"
+            },
+            "pricingOptions": {
+                "fareType": [
+                    "PUBLISHED"
+                ],
+                "includedCheckedBagsOnly": true
+            },
+            "validatingAirlineCodes": [
+                "PR"
+            ],
+            "travelerPricings": [
+                {
+                    "travelerId": "1",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "560.93",
+                        "base": "341.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "3",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "4",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "13",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "14",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "flight-offer",
+            "id": "4",
+            "source": "GDS",
+            "instantTicketingRequired": false,
+            "nonHomogeneous": false,
+            "oneWay": false,
+            "lastTicketingDate": "2022-11-01",
+            "numberOfBookableSeats": 9,
+            "itineraries": [
+                {
+                    "duration": "PT33H10M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2022-11-01T11:35:00"
+                            },
+                            "arrival": {
+                                "iataCode": "MNL",
+                                "terminal": "2",
+                                "at": "2022-11-01T16:50:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "212",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT8H15M",
+                            "id": "1",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2022-11-02T14:25:00"
+                            },
+                            "arrival": {
+                                "iataCode": "BKK",
+                                "at": "2022-11-02T16:45:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "736",
+                            "aircraft": {
+                                "code": "321"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT3H20M",
+                            "id": "2",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                },
+                {
+                    "duration": "PT16H15M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "BKK",
+                                "at": "2023-01-01T13:30:00"
+                            },
+                            "arrival": {
+                                "iataCode": "MNL",
+                                "terminal": "2",
+                                "at": "2023-01-01T18:00:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "731",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT3H30M",
+                            "id": "8",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2023-01-01T22:10:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2023-01-02T09:45:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "211",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT8H35M",
+                            "id": "9",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                }
+            ],
+            "price": {
+                "currency": "EUR",
+                "total": "560.93",
+                "base": "341.00",
+                "fees": [
+                    {
+                        "amount": "0.00",
+                        "type": "SUPPLIER"
+                    },
+                    {
+                        "amount": "0.00",
+                        "type": "TICKETING"
+                    }
+                ],
+                "grandTotal": "560.93"
+            },
+            "pricingOptions": {
+                "fareType": [
+                    "PUBLISHED"
+                ],
+                "includedCheckedBagsOnly": true
+            },
+            "validatingAirlineCodes": [
+                "PR"
+            ],
+            "travelerPricings": [
+                {
+                    "travelerId": "1",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "560.93",
+                        "base": "341.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "1",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "2",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "8",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "9",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "flight-offer",
+            "id": "5",
+            "source": "GDS",
+            "instantTicketingRequired": false,
+            "nonHomogeneous": false,
+            "oneWay": false,
+            "lastTicketingDate": "2022-11-01",
+            "numberOfBookableSeats": 9,
+            "itineraries": [
+                {
+                    "duration": "PT14H15M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2022-11-01T11:35:00"
+                            },
+                            "arrival": {
+                                "iataCode": "MNL",
+                                "terminal": "2",
+                                "at": "2022-11-01T16:50:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "212",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT8H15M",
+                            "id": "3",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2022-11-01T19:20:00"
+                            },
+                            "arrival": {
+                                "iataCode": "BKK",
+                                "at": "2022-11-01T21:50:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "732",
+                            "aircraft": {
+                                "code": "321"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT3H30M",
+                            "id": "4",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                },
+                {
+                    "duration": "PT35H50M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "BKK",
+                                "at": "2023-01-01T17:55:00"
+                            },
+                            "arrival": {
+                                "iataCode": "MNL",
+                                "terminal": "2",
+                                "at": "2023-01-01T22:25:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "737",
+                            "aircraft": {
+                                "code": "321"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT3H30M",
+                            "id": "11",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2023-01-02T22:10:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2023-01-03T09:45:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "211",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT8H35M",
+                            "id": "12",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                }
+            ],
+            "price": {
+                "currency": "EUR",
+                "total": "560.93",
+                "base": "341.00",
+                "fees": [
+                    {
+                        "amount": "0.00",
+                        "type": "SUPPLIER"
+                    },
+                    {
+                        "amount": "0.00",
+                        "type": "TICKETING"
+                    }
+                ],
+                "grandTotal": "560.93"
+            },
+            "pricingOptions": {
+                "fareType": [
+                    "PUBLISHED"
+                ],
+                "includedCheckedBagsOnly": true
+            },
+            "validatingAirlineCodes": [
+                "PR"
+            ],
+            "travelerPricings": [
+                {
+                    "travelerId": "1",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "560.93",
+                        "base": "341.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "3",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "4",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "11",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "12",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "flight-offer",
+            "id": "6",
+            "source": "GDS",
+            "instantTicketingRequired": false,
+            "nonHomogeneous": false,
+            "oneWay": false,
+            "lastTicketingDate": "2022-11-01",
+            "numberOfBookableSeats": 9,
+            "itineraries": [
+                {
+                    "duration": "PT28H30M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2022-11-01T11:35:00"
+                            },
+                            "arrival": {
+                                "iataCode": "MNL",
+                                "terminal": "2",
+                                "at": "2022-11-01T16:50:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "212",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT8H15M",
+                            "id": "5",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2022-11-02T09:45:00"
+                            },
+                            "arrival": {
+                                "iataCode": "BKK",
+                                "at": "2022-11-02T12:05:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "730",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT3H20M",
+                            "id": "6",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                },
+                {
+                    "duration": "PT30H55M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "BKK",
+                                "at": "2023-01-01T22:50:00"
+                            },
+                            "arrival": {
+                                "iataCode": "MNL",
+                                "terminal": "2",
+                                "at": "2023-01-02T03:15:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "733",
+                            "aircraft": {
+                                "code": "321"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT3H25M",
+                            "id": "13",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2023-01-02T22:10:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2023-01-03T09:45:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "211",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT8H35M",
+                            "id": "14",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                }
+            ],
+            "price": {
+                "currency": "EUR",
+                "total": "560.93",
+                "base": "341.00",
+                "fees": [
+                    {
+                        "amount": "0.00",
+                        "type": "SUPPLIER"
+                    },
+                    {
+                        "amount": "0.00",
+                        "type": "TICKETING"
+                    }
+                ],
+                "grandTotal": "560.93"
+            },
+            "pricingOptions": {
+                "fareType": [
+                    "PUBLISHED"
+                ],
+                "includedCheckedBagsOnly": true
+            },
+            "validatingAirlineCodes": [
+                "PR"
+            ],
+            "travelerPricings": [
+                {
+                    "travelerId": "1",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "560.93",
+                        "base": "341.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "5",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "6",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "13",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "14",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "flight-offer",
+            "id": "7",
+            "source": "GDS",
+            "instantTicketingRequired": false,
+            "nonHomogeneous": false,
+            "oneWay": false,
+            "lastTicketingDate": "2022-11-01",
+            "numberOfBookableSeats": 9,
+            "itineraries": [
+                {
+                    "duration": "PT33H10M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2022-11-01T11:35:00"
+                            },
+                            "arrival": {
+                                "iataCode": "MNL",
+                                "terminal": "2",
+                                "at": "2022-11-01T16:50:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "212",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT8H15M",
+                            "id": "1",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2022-11-02T14:25:00"
+                            },
+                            "arrival": {
+                                "iataCode": "BKK",
+                                "at": "2022-11-02T16:45:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "736",
+                            "aircraft": {
+                                "code": "321"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT3H20M",
+                            "id": "2",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                },
+                {
+                    "duration": "PT30H55M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "BKK",
+                                "at": "2023-01-01T22:50:00"
+                            },
+                            "arrival": {
+                                "iataCode": "MNL",
+                                "terminal": "2",
+                                "at": "2023-01-02T03:15:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "733",
+                            "aircraft": {
+                                "code": "321"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT3H25M",
+                            "id": "13",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2023-01-02T22:10:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2023-01-03T09:45:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "211",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT8H35M",
+                            "id": "14",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                }
+            ],
+            "price": {
+                "currency": "EUR",
+                "total": "560.93",
+                "base": "341.00",
+                "fees": [
+                    {
+                        "amount": "0.00",
+                        "type": "SUPPLIER"
+                    },
+                    {
+                        "amount": "0.00",
+                        "type": "TICKETING"
+                    }
+                ],
+                "grandTotal": "560.93"
+            },
+            "pricingOptions": {
+                "fareType": [
+                    "PUBLISHED"
+                ],
+                "includedCheckedBagsOnly": true
+            },
+            "validatingAirlineCodes": [
+                "PR"
+            ],
+            "travelerPricings": [
+                {
+                    "travelerId": "1",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "560.93",
+                        "base": "341.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "1",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "2",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "13",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "14",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "flight-offer",
+            "id": "8",
+            "source": "GDS",
+            "instantTicketingRequired": false,
+            "nonHomogeneous": false,
+            "oneWay": false,
+            "lastTicketingDate": "2022-11-01",
+            "numberOfBookableSeats": 9,
+            "itineraries": [
+                {
+                    "duration": "PT28H30M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2022-11-01T11:35:00"
+                            },
+                            "arrival": {
+                                "iataCode": "MNL",
+                                "terminal": "2",
+                                "at": "2022-11-01T16:50:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "212",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT8H15M",
+                            "id": "5",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2022-11-02T09:45:00"
+                            },
+                            "arrival": {
+                                "iataCode": "BKK",
+                                "at": "2022-11-02T12:05:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "730",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT3H20M",
+                            "id": "6",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                },
+                {
+                    "duration": "PT35H50M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "BKK",
+                                "at": "2023-01-01T17:55:00"
+                            },
+                            "arrival": {
+                                "iataCode": "MNL",
+                                "terminal": "2",
+                                "at": "2023-01-01T22:25:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "737",
+                            "aircraft": {
+                                "code": "321"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT3H30M",
+                            "id": "11",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2023-01-02T22:10:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2023-01-03T09:45:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "211",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT8H35M",
+                            "id": "12",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                }
+            ],
+            "price": {
+                "currency": "EUR",
+                "total": "560.93",
+                "base": "341.00",
+                "fees": [
+                    {
+                        "amount": "0.00",
+                        "type": "SUPPLIER"
+                    },
+                    {
+                        "amount": "0.00",
+                        "type": "TICKETING"
+                    }
+                ],
+                "grandTotal": "560.93"
+            },
+            "pricingOptions": {
+                "fareType": [
+                    "PUBLISHED"
+                ],
+                "includedCheckedBagsOnly": true
+            },
+            "validatingAirlineCodes": [
+                "PR"
+            ],
+            "travelerPricings": [
+                {
+                    "travelerId": "1",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "560.93",
+                        "base": "341.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "5",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "6",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "11",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "12",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "flight-offer",
+            "id": "9",
+            "source": "GDS",
+            "instantTicketingRequired": false,
+            "nonHomogeneous": false,
+            "oneWay": false,
+            "lastTicketingDate": "2022-11-01",
+            "numberOfBookableSeats": 9,
+            "itineraries": [
+                {
+                    "duration": "PT33H10M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2022-11-01T11:35:00"
+                            },
+                            "arrival": {
+                                "iataCode": "MNL",
+                                "terminal": "2",
+                                "at": "2022-11-01T16:50:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "212",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT8H15M",
+                            "id": "1",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2022-11-02T14:25:00"
+                            },
+                            "arrival": {
+                                "iataCode": "BKK",
+                                "at": "2022-11-02T16:45:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "736",
+                            "aircraft": {
+                                "code": "321"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT3H20M",
+                            "id": "2",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                },
+                {
+                    "duration": "PT35H50M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "BKK",
+                                "at": "2023-01-01T17:55:00"
+                            },
+                            "arrival": {
+                                "iataCode": "MNL",
+                                "terminal": "2",
+                                "at": "2023-01-01T22:25:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "737",
+                            "aircraft": {
+                                "code": "321"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT3H30M",
+                            "id": "11",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "MNL",
+                                "terminal": "1",
+                                "at": "2023-01-02T22:10:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2023-01-03T09:45:00"
+                            },
+                            "carrierCode": "PR",
+                            "number": "211",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "PR"
+                            },
+                            "duration": "PT8H35M",
+                            "id": "12",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                }
+            ],
+            "price": {
+                "currency": "EUR",
+                "total": "560.93",
+                "base": "341.00",
+                "fees": [
+                    {
+                        "amount": "0.00",
+                        "type": "SUPPLIER"
+                    },
+                    {
+                        "amount": "0.00",
+                        "type": "TICKETING"
+                    }
+                ],
+                "grandTotal": "560.93"
+            },
+            "pricingOptions": {
+                "fareType": [
+                    "PUBLISHED"
+                ],
+                "includedCheckedBagsOnly": true
+            },
+            "validatingAirlineCodes": [
+                "PR"
+            ],
+            "travelerPricings": [
+                {
+                    "travelerId": "1",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "560.93",
+                        "base": "341.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "1",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "2",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "11",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "12",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "TBAU",
+                            "class": "T",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "flight-offer",
+            "id": "10",
+            "source": "GDS",
+            "instantTicketingRequired": false,
+            "nonHomogeneous": false,
+            "oneWay": false,
+            "lastTicketingDate": "2022-04-19",
+            "numberOfBookableSeats": 3,
+            "itineraries": [
+                {
+                    "duration": "PT9H40M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2022-11-01T10:30:00"
+                            },
+                            "arrival": {
+                                "iataCode": "BKK",
+                                "at": "2022-11-01T16:10:00"
+                            },
+                            "carrierCode": "EK",
+                            "number": "5023",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "QF"
+                            },
+                            "duration": "PT9H40M",
+                            "id": "7",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                },
+                {
+                    "duration": "PT9H35M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "BKK",
+                                "at": "2023-01-01T18:00:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2023-01-02T07:35:00"
+                            },
+                            "carrierCode": "QF",
+                            "number": "24",
+                            "aircraft": {
+                                "code": "333"
+                            },
+                            "operating": {
+                                "carrierCode": "QF"
+                            },
+                            "duration": "PT9H35M",
+                            "id": "10",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                }
+            ],
+            "price": {
+                "currency": "EUR",
+                "total": "900.47",
+                "base": "751.00",
+                "fees": [
+                    {
+                        "amount": "0.00",
+                        "type": "SUPPLIER"
+                    },
+                    {
+                        "amount": "0.00",
+                        "type": "TICKETING"
+                    }
+                ],
+                "grandTotal": "900.47"
+            },
+            "pricingOptions": {
+                "fareType": [
+                    "PUBLISHED"
+                ],
+                "includedCheckedBagsOnly": true
+            },
+            "validatingAirlineCodes": [
+                "EK"
+            ],
+            "travelerPricings": [
+                {
+                    "travelerId": "1",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "900.47",
+                        "base": "751.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
                             "segmentId": "7",
                             "cabin": "ECONOMY",
-                            "fareBasis": "LNCLK",
+                            "fareBasis": "LLENPAU1",
                             "brandedFare": "ECOSAVER",
                             "class": "L",
                             "includedCheckedBags": {
-                                "quantity": 1
+                                "weight": 30,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "10",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "SKATD",
+                            "class": "S",
+                            "includedCheckedBags": {
+                                "weight": 30,
+                                "weightUnit": "KG"
                             }
                         }
                     ]
@@ -587,42 +2010,30 @@ export const testRes = {
     ],
     "dictionaries": {
         "locations": {
-            "ZRH": {
-                "cityCode": "ZRH",
-                "countryCode": "CH"
+            "BKK": {
+                "cityCode": "BKK",
+                "countryCode": "TH"
             },
-            "BOM": {
-                "cityCode": "BOM",
-                "countryCode": "IN"
+            "MNL": {
+                "cityCode": "MNL",
+                "countryCode": "PH"
             },
-            "AMS": {
-                "cityCode": "AMS",
-                "countryCode": "NL"
-            },
-            "CMB": {
-                "cityCode": "CMB",
-                "countryCode": "LK"
-            },
-            "MUC": {
-                "cityCode": "MUC",
-                "countryCode": "DE"
+            "SYD": {
+                "cityCode": "SYD",
+                "countryCode": "AU"
             }
         },
         "aircraft": {
-            "221": "AIRBUS  A220-100",
-            "320": "AIRBUS A320",
-            "343": "AIRBUS A340-300",
-            "359": "AIRBUS A350-900",
-            "32A": "AIRBUS A320 (SHARKLETS)"
+            "321": "AIRBUS A321",
+            "333": "AIRBUS A330-300"
         },
         "currencies": {
             "EUR": "EURO"
         },
         "carriers": {
-            "WK": "EDELWEISS AIR",
-            "UL": "SRILANKAN AIRLINES",
-            "LX": "SWISS INTERNATIONAL AIR LINES",
-            "LH": "LUFTHANSA"
+            "PR": "PHILIPPINE AIRLINES",
+            "QF": "QANTAS AIRWAYS",
+            "EK": "EMIRATES"
         }
     }
 }

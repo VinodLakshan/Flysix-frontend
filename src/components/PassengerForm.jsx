@@ -12,7 +12,7 @@ import React, { useState } from 'react'
 import MuiPhoneNumber from 'material-ui-phone-number';
 import { formateDateToSimpleDate } from '../utils/Common';
 
-const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
+const PassengerForm = ({ passengerDetails, changePassengerDetails, passengerEditable }) => {
 
     const [passenger, setPassenger] = useState(passengerDetails)
 
@@ -29,6 +29,7 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                             setPassenger({ ...passenger, [e.target.name]: e.target.value })
                         }}
                         onBlur={() => changePassengerDetails(passenger)}
+                        disabled={!passengerEditable}
                     >
                         <MenuItem sx={{ display: passengerDetails.type !== Const.Adult ? "none" : "flex" }} value="Mr">Mr</MenuItem>
                         <MenuItem sx={{ display: passengerDetails.type === Const.Adult ? "none" : "flex" }} value="Master">Master</MenuItem>
@@ -51,6 +52,7 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                     id="first-name"
                     name="firstName"
                     size="small"
+                    disabled={!passengerEditable}
                 />
             </Grid>
 
@@ -64,6 +66,7 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                     id="last-name"
                     name="lastName"
                     size="small"
+                    disabled={!passengerEditable}
                 />
             </Grid>
 
@@ -81,6 +84,7 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                                 readOnly: true,
                             }}
                             renderInput={(params) => <TextField {...params} required fullWidth size="small" />}
+                            disabled={!passengerEditable}
                         />
                     </Box>
                     <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
@@ -93,6 +97,7 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                                 readOnly: true,
                             }}
                             renderInput={(params) => <TextField {...params} required fullWidth size="small" />}
+                            disabled={!passengerEditable}
                         />
                     </Box>
                 </LocalizationProvider>
@@ -108,6 +113,7 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                     label="Passport Number"
                     id="passport-number"
                     size="small"
+                    disabled={!passengerEditable}
                 />
             </Grid>
 
@@ -124,6 +130,7 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                                 readOnly: true,
                             }}
                             renderInput={(params) => <TextField {...params} required fullWidth size="small" />}
+                            disabled={!passengerEditable}
                         />
                     </Box>
                     <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
@@ -137,6 +144,7 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                                 readOnly: true,
                             }}
                             renderInput={(params) => <TextField {...params} required fullWidth size="small" />}
+                            disabled={!passengerEditable}
                         />
                     </Box>
                 </LocalizationProvider>
@@ -152,6 +160,7 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                     name="issuedCountry"
                     id="issued-country"
                     size="small"
+                    disabled={!passengerEditable}
                 />
             </Grid>
 
@@ -166,6 +175,7 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                     id="email"
                     size="small"
                     helperText="* Your ticket will be sent to this email."
+                    disabled={!passengerEditable}
                 />
             </Grid>}
 
@@ -180,6 +190,7 @@ const PassengerForm = ({ passengerDetails, changePassengerDetails }) => {
                     size="small"
                     name="mobileNo"
                     label="Mobile Number"
+                    disabled={!passengerEditable}
                     countryCodeEditable={false}
                     defaultCountry={'us'} />
             </Grid>}

@@ -11,7 +11,7 @@ import TripDetails from '../components/TripDetails'
 import { updatePassengers, updateSelectedBooking } from '../redux/userRedux'
 import { Const } from '../Properties'
 import { LoadingButton } from '@mui/lab'
-import { saveReservation, makePayment } from '../utils/ApiCalls'
+import { saveReservation, createPaymentSession } from '../utils/ApiCalls'
 
 const FlightDetails = () => {
 
@@ -29,7 +29,7 @@ const FlightDetails = () => {
             bookingId: bookingId,
             currency: selectedBooking.payment.currency,
             price: selectedBooking.payment.total,
-            successUrl: `http://localhost:3000/successPayment/${bookingId}`,
+            successUrl: "http://localhost:3000/successPayment",
             cancelUrl: "http://localhost:3000/passenger"
         }
 
@@ -47,7 +47,7 @@ const FlightDetails = () => {
 
                 if (selectedBooking.bookingType === Const.Instant) {
 
-                    const payRes = await makePayment(dispatch, token, setUpPayment(res.data.bookingId));
+                    const payRes = await createPaymentSession(dispatch, token, setUpPayment(res.data.bookingId));
 
                     switch (payRes.status) {
 
@@ -64,7 +64,7 @@ const FlightDetails = () => {
                     }
                 } else {
                     // hold for free
-                    window.location.href = `http://localhost:3000/successPayment/${res.data.bookingId}`;
+                    window.location.href = `http://localhost:3000/successPayment?bookingId=${res.data.bookingId}&type=${Const.Unconfirmed}`;
                     // setIsLoading(false);
                 };
                 break;
@@ -80,7 +80,7 @@ const FlightDetails = () => {
 
     useEffect(() => {
 
-        if (!selectedBooking.flight || !selectedBooking.reservedBy) {
+        if (!selectedBooking || !selectedBooking.flight || !selectedBooking.reservedBy) {
             navigate("/")
 
         } else {
@@ -115,33 +115,39 @@ const FlightDetails = () => {
 
                     <Stack spacing={2}>
                         <TripDetails tripData={selectedBooking.flight} />
-                        <PassengerDetails passengers={passengers} setPassengers={setPassengers} />
+                        <PassengerDetails passengers={passengers} setPassengers={setPassengers} searchItems={searchCriteria}
+                            passengerEditable={true}
+                        />
 
                     </Stack>
                 }
 
-                <Stack spacing={2}>
-                    <FareSummary price={selectedBooking.payment} travellers={{
-                        adults: searchCriteria.adults,
-                        children: searchCriteria.children,
-                        infants: searchCriteria.infants,
-                    }}
-                    />
-                    <DiscountForm />
+                {
+                    selectedBooking &&
 
-                    <LoadingButton
-                        color="primary"
-                        fullWidth
-                        onClick={handlePayment}
-                        loading={isLoading}
-                        variant="contained"
-                    // sx={{ mt: 2, mb: 2 }}
-                    >
-                        {selectedBooking.bookingType === Const.Instant && `Continue to Pay`}
-                        {selectedBooking.bookingType === Const.HoldForFree && `Confirm Booking`}
-                    </LoadingButton>
+                    <Stack spacing={2}>
+                        <FareSummary price={selectedBooking.payment} travellers={{
+                            adults: searchCriteria.adults,
+                            children: searchCriteria.children,
+                            infants: searchCriteria.infants,
+                        }}
+                        />
+                        <DiscountForm />
 
-                </Stack>
+                        <LoadingButton
+                            color="primary"
+                            fullWidth
+                            onClick={handlePayment}
+                            loading={isLoading}
+                            variant="contained"
+                        // sx={{ mt: 2, mb: 2 }}
+                        >
+                            {selectedBooking.bookingType === Const.Instant && `Continue to Pay`}
+                            {selectedBooking.bookingType === Const.HoldForFree && `Confirm Booking`}
+                        </LoadingButton>
+
+                    </Stack>
+                }
 
             </Stack>
 

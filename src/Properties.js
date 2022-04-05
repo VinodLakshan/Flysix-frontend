@@ -1,5 +1,9 @@
 export const Properties = {
     backendUrl: "http://localhost:8080/flysix",
+    findFlightsBaseUrl: "https://test.api.amadeus.com/v2/shopping/flight-offers",
+    flightTokenUrl: "https://test.api.amadeus.com/v1/security/oauth2/token",
+    flightClientId: "pQFvxpeSRWXLsWUHqqXS6ehIhLUMhZLQ",
+    flightClientSecret: "hnDWFUm9cCA0kd6U",
     STRIPE_KEY: "pk_test_IH3EUneSSiy6p8w54s0QZ4xd00YujaqKsa"
 }
 
@@ -26,7 +30,7 @@ export const Trips = {
 
 export const Class = {
     economy: "Economy",
-    premiumEconomy: "Premium Economy",
+    premiumEconomy: "Premium_Economy",
     business: "Business",
     first: "First"
 }
