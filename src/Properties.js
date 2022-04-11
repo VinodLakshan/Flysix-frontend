@@ -18,8 +18,11 @@ export const Const = {
     Instant: "Instant",
     HoldForFree: "HoldForFree",
 
-    Unconfirmed: "Unconfirmed",
-    Confirmed: "Confirmed"
+    Unconfirmed: "Pending",
+    Confirmed: "Confirmed",
+    Cancelled: "Cancelled",
+
+    All: "All"
 }
 
 export const Trips = {

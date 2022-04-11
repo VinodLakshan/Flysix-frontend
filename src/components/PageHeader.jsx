@@ -16,8 +16,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { logout } from '../redux/userRedux';
 
-const pages = ["Confirm Booking"];
-const pageLinks = ["/confirmBooking"];
+const pages = ["My Reservations", "Confirm Booking"];
+const pageLinks = ["/myReservations", "/confirmBooking"];
 
 const PageHeader = () => {
 

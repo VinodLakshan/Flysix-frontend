@@ -23,6 +23,9 @@ const userSlice = createSlice(
                 state.isFetching = false;
                 state.error = true;
             },
+            authFetchingDone: (state) => {
+                state.isFetching = false;
+            },
             logout: (state) => {
                 state.currentUser = null;
                 state.token = null;
@@ -48,5 +51,5 @@ const userSlice = createSlice(
 );
 
 export const { authStart, authSuccess, authFailure, logout,
-    updateSelectedBooking, updatePassengers, reservationSuccess, paymentSuccess, clearSelectedBooking } = userSlice.actions;
+    updateSelectedBooking, updatePassengers, reservationSuccess, paymentSuccess, clearSelectedBooking, authFetchingDone } = userSlice.actions;
 export default userSlice.reducer;
