@@ -15,6 +15,7 @@ import Logo from './Logo';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { logout } from '../redux/userRedux';
+import { Delete } from '@mui/icons-material';
 
 const pages = ["My Reservations", "Confirm Booking"];
 const pageLinks = ["/myReservations", "/confirmBooking"];
@@ -174,6 +175,7 @@ const PageHeader = () => {
                                 </Menu>
                             </Box>}
                     </Box>
+
                 </Toolbar>
             </Container>
         </AppBar >

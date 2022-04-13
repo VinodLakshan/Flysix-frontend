@@ -98,7 +98,7 @@ const MyReservations = () => {
                     alignItems={{ sm: "center" }}
                     sx={{
                         m: 2,
-                        px: 2
+                        px: 2,
                     }}>
                     <ReservationFilters filters={filters} setFilters={setFilters} applyFilters={applyFilters} />
                     <ReservationsTable rows={rows} />

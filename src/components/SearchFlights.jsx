@@ -1,5 +1,5 @@
-import { CompareArrows, FlightLand, FlightTakeoff, Search } from '@mui/icons-material'
-import { Alert, Autocomplete, Button, Dialog, DialogContent, DialogTitle, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Slider, Snackbar, Stack, TextField, Typography } from '@mui/material'
+import { CompareArrows, FlightLand, FlightTakeoff, Search, AddAPhotoSharp, AttachMoney } from '@mui/icons-material'
+import { Alert, Autocomplete, Button, Dialog, Fab, DialogContent, DialogTitle, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Slider, Snackbar, Stack, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useEffect } from 'react'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -8,14 +8,19 @@ import { airports } from "../Data";
 import { useDispatch, useSelector } from 'react-redux';
 import { findFlights } from '../utils/ApiCalls';
 import { useNavigate } from 'react-router-dom';
-import { Class, Trips } from '../Properties';
+import { Class, Currencies, Trips } from '../Properties';
 import { formateDateToSimpleDate, getSliderMarks } from '../utils/Common';
+import CurrencySelector from './CurrencySelector';
 
 const SearchFlights = ({ type }) => {
 
     const [alertError, setAlertError] = React.useState("");
     const [showErrorAlert, setShowErrorAlert] = React.useState(false);
     const [passengerDialogOpen, setPassengerDialogOpen] = React.useState(false);
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { isFetching, searchCriteria } = useSelector(state => state.flight);
 
     const [searchItems, setSearchItems] = React.useState({
         trip: Trips.round,
@@ -26,12 +31,9 @@ const SearchFlights = ({ type }) => {
         returnDate: null,
         adults: 1,
         children: 0,
-        infants: 0
+        infants: 0,
+        currency: Currencies.USD
     });
-
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const { isFetching, searchCriteria } = useSelector(state => state.flight);
 
     useEffect(() => {
 
@@ -48,7 +50,6 @@ const SearchFlights = ({ type }) => {
             ((searchItems.trip === Trips.oneWay) || (searchItems.trip === Trips.round && searchItems.returnDate))) {
 
             if (searchItems.origin.id !== searchItems.destination.id) {
-
                 const res = await findFlights(dispatch, searchItems);
 
                 switch (res.status) {
@@ -74,7 +75,6 @@ const SearchFlights = ({ type }) => {
             setShowErrorAlert(true);
         }
 
-
     }
 
     return (
@@ -87,6 +87,7 @@ const SearchFlights = ({ type }) => {
                 maxWidth: type === "hr" ? 1100 : 800
             }}
         >
+
             <Grid container columnSpacing={1} rowSpacing={{ xs: 3, sm: 4 }} sx={{ p: 4 }}>
                 <Grid item xs={6} sm={3} md={type === "hr" ? 2.5 : 3}>
 
@@ -428,11 +429,14 @@ const SearchFlights = ({ type }) => {
 
             </Grid>
 
+            <CurrencySelector searchItems={searchItems} setSearchItems={setSearchItems} />
+
             <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} open={showErrorAlert} autoHideDuration={6000} onClose={() => setShowErrorAlert(false)}>
                 <Alert variant="filled" onClose={() => setShowErrorAlert(false)} severity="error" sx={{ width: 400 }}>
                     {alertError}
                 </Alert>
             </Snackbar>
+
         </Paper >
     )
 }

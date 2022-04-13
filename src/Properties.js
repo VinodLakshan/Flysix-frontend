@@ -37,3 +37,10 @@ export const Class = {
     business: "Business",
     first: "First"
 }
+
+export const Currencies = {
+    USD: { code: "USD", icon: "AttachMoney" },
+    Euro: { code: "EUR", icon: "Euro" },
+    Pound: { code: "GBP", icon: "CurrencyPound" },
+    Yen: { code: "JPY", icon: "CurrencyYen" },
+}

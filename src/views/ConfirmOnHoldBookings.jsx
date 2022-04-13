@@ -155,7 +155,7 @@ const ConfirmOnHoldBookings = () => {
                 !booking &&
 
                 <MotionContainer initial="initial" open>
-                    <Box sx={{ maxWidth: 480, margin: 'auto', textAlign: 'center' }}>
+                    <Box sx={{ maxWidth: 480, height: "62vh", margin: 'auto', textAlign: 'center' }}>
 
                         <motion.div variants={varBounceIn}>
                             <Box
@@ -198,7 +198,6 @@ const ConfirmOnHoldBookings = () => {
                                 onClick={handlePayment}
                                 loading={isLoading}
                                 variant="contained"
-                            // sx={{ mt: 2, mb: 2 }}
                             >
                                 Continue to Pay
                             </LoadingButton>
