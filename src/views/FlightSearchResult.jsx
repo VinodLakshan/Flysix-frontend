@@ -8,7 +8,7 @@ import Footer from '../components/Footer'
 import PageHeader from '../components/PageHeader'
 import SearchFlights from '../components/SearchFlights'
 import SearchResults from '../components/SearchResults'
-import { Const } from '../Properties'
+import { Const, Currencies } from '../Properties'
 import { updateFilteredFlightList } from '../redux/flightRedux'
 import { codeToAirportName, formatStringToDate, getHourNumberFromDuration, getPTDuration, getTimeDuration } from '../utils/Common'
 
@@ -142,6 +142,7 @@ const FlightSearchResult = () => {
                 },
                 price: {
                     currency: "",
+                    symbol: "",
                     total: 0
                 }
 
@@ -150,6 +151,7 @@ const FlightSearchResult = () => {
             organizedFlight.id = flight.id;
             // Since the developer API returns the same price values since using random to make prices different
             organizedFlight.price.currency = flight.price.currency;
+            organizedFlight.price.symbol = Currencies[flight.price.currency].symbol;
             organizedFlight.price.total = Number((Number(flight.price.grandTotal) * (Math.random() + 1)).toFixed(2));
 
             organizedFlight.airline.code = flight.validatingAirlineCodes[0];

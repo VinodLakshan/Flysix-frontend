@@ -1,6 +1,5 @@
 import { LoadingButton } from '@mui/lab'
-import { Alert, Paper, Snackbar, Stack, TextField } from '@mui/material'
-import { Box } from '@mui/system'
+import { Alert, Paper, Snackbar, Stack, TextField, Box } from '@mui/material'
 import React from 'react'
 import DiscountForm from '../components/DiscountForm'
 import FareSummary from '../components/FareSummary'
@@ -12,7 +11,7 @@ import { MotionContainer, varBounceIn } from '../theme/animate'
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux'
 import { findUnconfirmedOnHoldBooking, createPaymentSession } from '../utils/ApiCalls'
-import { Const } from '../Properties'
+import { Const, Currencies } from '../Properties'
 
 const ConfirmOnHoldBookings = () => {
 
@@ -56,6 +55,7 @@ const ConfirmOnHoldBookings = () => {
             switch (res.status) {
 
                 case 200:
+                    res.data.payment.symbol = Currencies[res.data.payment.currency].symbol;
                     setBooking(res.data);
                     break;
 
@@ -109,9 +109,8 @@ const ConfirmOnHoldBookings = () => {
         <Stack
             direction="column"
             alignItems='center'
-            justifyContent="center"
             spacing={4}
-            sx={{ bgcolor: "white" }}
+            sx={{ bgcolor: "white", minHeight: "100vh" }}
         >
             <PageHeader />
 
@@ -121,7 +120,8 @@ const ConfirmOnHoldBookings = () => {
                     display: 'flex',
                     justifyContent: 'center',
                     borderRadius: 2,
-                    maxWidth: 800
+                    maxWidth: 800,
+
                 }}
             >
                 <Stack
@@ -154,8 +154,8 @@ const ConfirmOnHoldBookings = () => {
             {
                 !booking &&
 
-                <MotionContainer initial="initial" open>
-                    <Box sx={{ maxWidth: 480, height: "62vh", margin: 'auto', textAlign: 'center' }}>
+                <MotionContainer initial="initial" open sx={{ flex: 1 }}>
+                    <Box sx={{ maxWidth: 480, margin: 'auto', textAlign: 'center' }}>
 
                         <motion.div variants={varBounceIn}>
                             <Box

@@ -39,48 +39,56 @@ const sendAuth = async (dispatch, user, method) => {
 export const findFlights = async (dispatch, searchCriteria) => {
 
     dispatch(fetchingStart())
-    try {
-        const accessRes = await getAccessToken();
+    // try {
+    //     const accessRes = await getAccessToken();
 
-        if (accessRes.status === 200) {
+    //     if (accessRes.status === 200) {
 
-            let findFlightUrl = Properties.findFlightsBaseUrl +
-                "?originLocationCode=" + searchCriteria.origin.id +
-                "&destinationLocationCode=" + searchCriteria.destination.id +
-                "&departureDate=" + searchCriteria.departDate +
-                "&adults=" + searchCriteria.adults +
-                "&children=" + searchCriteria.children +
-                "&infants=" + searchCriteria.infants +
-                "&travelClass=" + searchCriteria.bookingClass.toUpperCase() +
-                "&currencyCode=" + searchCriteria.currency.code.toUpperCase() +
-                "&max=10";
+    //         let findFlightUrl = Properties.findFlightsBaseUrl +
+    //             "?originLocationCode=" + searchCriteria.origin.id +
+    //             "&destinationLocationCode=" + searchCriteria.destination.id +
+    //             "&departureDate=" + searchCriteria.departDate +
+    //             "&adults=" + searchCriteria.adults +
+    //             "&children=" + searchCriteria.children +
+    //             "&infants=" + searchCriteria.infants +
+    //             "&travelClass=" + searchCriteria.bookingClass.toUpperCase() +
+    //             // "&currencyCode=" + searchCriteria.currency.code.toUpperCase() +
+    //             "&currencyCode=" + searchCriteria.currency +
+    //             "&max=10";
 
-            if (searchCriteria.trip === Trips.round)
-                findFlightUrl += "&returnDate=" + searchCriteria.returnDate;
-
-            const flightRes = await axios.get(findFlightUrl, {
-                headers: {
-                    "Authorization": "Bearer " + accessRes.data.access_token
-                }
-            })
-
-            dispatch(fetchingSuccess(searchCriteria));
-            return { status: 200, data: flightRes.data };
+    //         if (searchCriteria.trip === Trips.round)
+    //             findFlightUrl += "&returnDate=" + searchCriteria.returnDate;
 
 
-        } else {
-            dispatch(fetchError())
-            return accessRes;
-        }
+    //         const flightRes = await axios.get(findFlightUrl, {
+    //             headers: {
+    //                 "Authorization": "Bearer " + accessRes.data.access_token
+    //             }
+    //         })
 
-    } catch (ex) {
-        dispatch(fetchError())
-        console.log("Flight search error : ");
-        return ex.response.data;
-    }
+    //         dispatch(fetchingSuccess(searchCriteria));
+    //         return { status: 200, data: flightRes.data };
 
-    // dispatch(fetchingSuccess(searchCriteria));
-    // return { status: 200, data: testRes };
+
+    //     } else {
+    //         dispatch(fetchError())
+    //         return accessRes;
+    //     }
+
+    // } catch (err) {
+    //     dispatch(fetchError())
+    //     console.log("Flight search error : ");
+    //     console.log(err.response.data.errors[0].detail);
+    //     console.log(err.response.data.errors[0].source);
+
+    //     return {
+    //         status: err.response.status,
+    //         error: err.response.data.errors[0].title
+    //     };
+    // }
+
+    dispatch(fetchingSuccess(searchCriteria));
+    return { status: 200, data: testRes };
 }
 
 const getAccessToken = async () => {

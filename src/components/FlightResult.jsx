@@ -78,7 +78,7 @@ const FlightResult = ({ flight }) => {
                                         {/* <Stack direction="row" spacing={1} alignItems="center">
                                             <Avatar sx={{ width: 28, height: 28 }} variant="rounded" src='/static/illustrations/Emirates_logo.png' />
                                         </Stack> */}
-                                        <Typography variant="h6">{`${flight.price.currency} ${flight.price.total}`} </Typography>
+                                        <Typography variant="h6">{`${flight.price.symbol} ${flight.price.total}`} </Typography>
                                     </Stack>
 
 

@@ -38,12 +38,12 @@ const FareSummary = ({ price, travellers }) => {
                         <Typography variant="body1">Fare</Typography>
                         <Typography variant='body2'>Base fare & taxes</Typography>
                     </Box>
-                    <Typography variant="subtitle1">{price.currency} {price.total}</Typography>
+                    <Typography variant="subtitle1">{price.symbol} {price.total}</Typography>
                 </Stack>
                 <Divider />
                 <Stack direction="row" px={1} justifyContent="space-between" alignItems="center" spacing={1}>
                     <Typography variant="body1">Booking Fee</Typography>
-                    <Typography variant="body1">{price.currency} 0</Typography>
+                    <Typography variant="body1">{price.symbol} 0</Typography>
                 </Stack>
                 <Divider />
                 <Stack direction="row" px={1} justifyContent="space-between" alignItems="flex-end" spacing={1}>
@@ -51,7 +51,7 @@ const FareSummary = ({ price, travellers }) => {
                         <Typography variant="body1">Promotions</Typography>
                         <Typography variant='body2'>10% member discount</Typography>
                     </Box>
-                    <Typography variant="subtitle1">{price.currency} 0</Typography>
+                    <Typography variant="subtitle1">{price.symbol} 0</Typography>
                 </Stack>
 
             </Stack>
@@ -66,7 +66,7 @@ const FareSummary = ({ price, travellers }) => {
                     style={{ color: "white" }}
                 >
                     <Typography variant="h6">Grand Total</Typography>
-                    <Typography variant="h6">{price.currency} {price.total}</Typography>
+                    <Typography variant="h6">{price.symbol} {price.total}</Typography>
                 </Stack>
             </Box>
         </Paper>

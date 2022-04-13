@@ -39,8 +39,8 @@ export const Class = {
 }
 
 export const Currencies = {
-    USD: { code: "USD", icon: "AttachMoney" },
-    Euro: { code: "EUR", icon: "Euro" },
-    Pound: { code: "GBP", icon: "CurrencyPound" },
-    Yen: { code: "JPY", icon: "CurrencyYen" },
+    USD: { name: "USD", code: "USD", symbol: "$", icon: "AttachMoney" },
+    EUR: { name: "Euro", code: "EUR", symbol: "€", icon: "Euro" },
+    GBP: { name: "Pound", code: "GBP", symbol: "£", icon: "CurrencyPound" },
+    JPY: { name: "Yen", code: "JPY", symbol: "¥", icon: "CurrencyYen" },
 }

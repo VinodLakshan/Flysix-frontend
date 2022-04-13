@@ -88,30 +88,32 @@ const MyReservations = () => {
 
 
     return (
-        <Box sx={{ backgroundColor: "white" }}>
-
+        <Stack
+            spacing={4}
+            sx={{
+                backgroundColor: "white",
+                minHeight: "100vh"
+            }}
+        >
+            <PageHeader />
             <Stack
-                spacing={4}
-            >
-                <PageHeader />
-                <Stack
-                    alignItems={{ sm: "center" }}
-                    sx={{
-                        m: 2,
-                        px: 2,
-                    }}>
-                    <ReservationFilters filters={filters} setFilters={setFilters} applyFilters={applyFilters} />
-                    <ReservationsTable rows={rows} />
-                </Stack>
-                <Footer />
+                alignItems={{ sm: "center" }}
+                sx={{
+                    m: 2,
+                    px: 2,
+                    flex: 1
+                }}>
+                <ReservationFilters filters={filters} setFilters={setFilters} applyFilters={applyFilters} />
+                <ReservationsTable rows={rows} />
             </Stack>
-
+            <Footer />
             <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} open={showErrorAlert} autoHideDuration={6000} onClose={() => setShowErrorAlert(false)}>
                 <Alert variant="filled" onClose={() => setShowErrorAlert(false)} severity="error" sx={{ width: 400 }}>
                     {alertError}
                 </Alert>
             </Snackbar >
-        </Box >
+        </Stack>
+
     )
 }
 

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Box } from '@mui/material'
-import { Euro, CurrencyPound, CurrencyYen } from '@mui/icons-material'
 import * as MuIcon from "@mui/icons-material";
 import { Action, Fab } from 'react-tiny-fab';
 import { Currencies } from '../Properties';
@@ -39,7 +38,7 @@ const CurrencySelector = ({ searchItems, setSearchItems }) => {
                     Object.keys(Currencies).map(cur => {
                         return (
                             <Action key={cur}
-                                text={cur}
+                                text={Currencies[cur].name}
                                 style={style}
                                 onClick={() => changeCurrentCurrency(Currencies[cur])}
                             >
@@ -48,30 +47,6 @@ const CurrencySelector = ({ searchItems, setSearchItems }) => {
                         );
                     })
                 }
-
-                {/* <Action
-                    text="Euro"
-                    style={style}
-                    onClick={() => changeCurrentCurrency(Currencies.Euro)}
-                >
-                    <Euro />
-                </Action>
-
-                <Action
-                    text="Pound"
-                    style={style}
-                    onClick={() => changeCurrentCurrency(Currencies.Pound)}
-                >
-                    <CurrencyPound />
-                </Action>
-
-                <Action
-                    text="Yen"
-                    style={style}
-                    onClick={() => changeCurrentCurrency(Currencies.Yen)}
-                >
-                    <CurrencyYen />
-                </Action> */}
 
             </Fab>
         </Box>

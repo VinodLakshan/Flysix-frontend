@@ -33,69 +33,66 @@ const SuccessPayment = () => {
 
 
     return (
-        <Box sx={{ backgroundColor: "white" }}>
-
-            <Stack>
-                <PageHeader />
-                <Container sx={{
-                    py: 2
-                }}>
-                    <MotionContainer initial="initial" open>
-                        <Box sx={{ maxWidth: 480, margin: 'auto', textAlign: 'center' }}>
-                            <motion.div variants={varBounceIn}>
-                                {
-                                    type === Const.Confirmed &&
-
-                                    <Typography variant="h3" paragraph>
-                                        Great! Your Booking is confirmed!
-                                    </Typography>
-                                }
-
-                                {
-                                    type === Const.Unconfirmed &&
-
-                                    <Typography variant="h3" paragraph>
-                                        Great! Your Booking is on hold!
-                                    </Typography>
-                                }
-
-                            </motion.div>
+        <Stack sx={{ backgroundColor: "white", minHeight: "100vh" }}>
+            <PageHeader />
+            <Container sx={{
+                py: 2,
+                flex: 1
+            }}>
+                <MotionContainer initial="initial" open>
+                    <Box sx={{ maxWidth: 480, margin: 'auto', textAlign: 'center' }}>
+                        <motion.div variants={varBounceIn}>
                             {
-                                (type === Const.Confirmed && bookingId) &&
+                                type === Const.Confirmed &&
 
-                                <Typography sx={{ color: 'text.secondary' }}>
-                                    Reservation details for the booking number <u><b>{bookingId}</b></u> will be shortly received via email. Have a nice day!
+                                <Typography variant="h3" paragraph>
+                                    Great! Your Booking is confirmed!
                                 </Typography>
                             }
 
                             {
-                                (type === Const.Unconfirmed && bookingId) &&
+                                type === Const.Unconfirmed &&
 
-                                <Typography sx={{ color: 'text.secondary' }}>
-                                    Please make the payment for the booking number <u><b>{bookingId}</b></u> within 2 days to confirm your booking. Have a nice day!
+                                <Typography variant="h3" paragraph>
+                                    Great! Your Booking is on hold!
                                 </Typography>
                             }
 
+                        </motion.div>
+                        {
+                            (type === Const.Confirmed && bookingId) &&
 
-                            <motion.div variants={varBounceIn}>
-                                <Box
-                                    component="img"
-                                    src="/static/illustrations/success.gif"
-                                    sx={{ height: 250, mx: 'auto', my: 8 }}
-                                />
-                            </motion.div>
+                            <Typography sx={{ color: 'text.secondary' }}>
+                                Reservation details for the booking number <u><b>{bookingId}</b></u> will be shortly received via email. Have a nice day!
+                            </Typography>
+                        }
 
-                            <Button onClick={() => navigate("/")} size="large" variant="contained">
-                                Go to Home
-                            </Button>
-                        </Box>
-                    </MotionContainer>
+                        {
+                            (type === Const.Unconfirmed && bookingId) &&
 
-                </Container>
-                <Footer />
-            </Stack>
+                            <Typography sx={{ color: 'text.secondary' }}>
+                                Please make the payment for the booking number <u><b>{bookingId}</b></u> within 2 days to confirm your booking. Have a nice day!
+                            </Typography>
+                        }
 
-        </Box>
+
+                        <motion.div variants={varBounceIn}>
+                            <Box
+                                component="img"
+                                src="/static/illustrations/success.gif"
+                                sx={{ height: 250, mx: 'auto', my: 8 }}
+                            />
+                        </motion.div>
+
+                        <Button onClick={() => navigate("/")} size="large" variant="contained">
+                            Go to Home
+                        </Button>
+                    </Box>
+                </MotionContainer>
+
+            </Container>
+            <Footer />
+        </Stack>
     )
 }
 
