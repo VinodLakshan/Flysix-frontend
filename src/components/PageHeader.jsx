@@ -11,6 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { Divider } from '@mui/material'
 import Logo from './Logo';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -169,7 +170,24 @@ const PageHeader = () => {
                                     open={Boolean(anchorElUser)}
                                     onClose={handleCloseUserMenu}
                                 >
-                                    <MenuItem key="logout" onClick={handleCloseUserMenu}>
+                                    <Box sx={{ my: 1.5, px: 2.5, minWidth: 200 }}>
+                                        <Typography variant="subtitle1" noWrap>
+                                            {currentUser.name}
+                                        </Typography>
+                                        <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
+                                            {currentUser.email}
+                                        </Typography>
+                                    </Box>
+
+                                    <Divider sx={{ borderStyle: 'dashed' }} />
+
+                                    <MenuItem key="account" variant="subtitle2" onClick={handleCloseUserMenu} sx={{ m: 1 }}>
+                                        <Link to="/account" style={{ textDecoration: "none", color: "black" }}>
+                                            <Typography>Account</Typography>
+                                        </Link>
+                                    </MenuItem>
+
+                                    <MenuItem key="logout" variant="subtitle2" onClick={handleCloseUserMenu} sx={{ m: 1 }}>
                                         <Typography onClick={handleLogout}>Logout</Typography>
                                     </MenuItem>
                                 </Menu>

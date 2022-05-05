@@ -8,6 +8,7 @@ import FlightDetails from '../views/FlightDetails';
 import SuccessPayment from '../views/SuccessPayment';
 import ConfirmOnHoldBookings from '../views/ConfirmOnHoldBookings';
 import MyReservations from '../views/MyReservations';
+import Account from '../views/Account';
 
 const AppRoute = () => {
     return (
@@ -21,6 +22,7 @@ const AppRoute = () => {
                 <Route exact path="/successPayment" element={<SuccessPayment />} />
                 <Route exact path="/confirmBooking" element={<ConfirmOnHoldBookings />} />
                 <Route exact path="/myReservations" element={<MyReservations />} />
+                <Route exact path="/account" element={<Account />} />
             </Routes>
         </Router>
     )

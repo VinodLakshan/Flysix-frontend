@@ -111,7 +111,7 @@ const MyReservations = () => {
                 <Alert variant="filled" onClose={() => setShowErrorAlert(false)} severity="error" sx={{ width: 400 }}>
                     {alertError}
                 </Alert>
-            </Snackbar >
+            </Snackbar>
         </Stack>
 
     )
