@@ -77,8 +77,8 @@ export const findFlights = async (dispatch, searchCriteria) => {
                 "&children=" + searchCriteria.children +
                 "&infants=" + searchCriteria.infants +
                 "&travelClass=" + searchCriteria.bookingClass.toUpperCase() +
-                // "&currencyCode=" + searchCriteria.currency.code.toUpperCase() +
-                "&currencyCode=" + searchCriteria.currency +
+                "&currencyCode=" + searchCriteria.currency.code.toUpperCase() +
+                // "&currencyCode=" + searchCriteria.currency +
                 "&max=10";
 
             if (searchCriteria.trip === Trips.round)
